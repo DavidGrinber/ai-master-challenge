@@ -50,4 +50,25 @@ Registrada antes de qualquer leitura do conteúdo dos CSVs neste fluxo. O texto 
 - Exploração anterior declarada pelo candidato: antes deste fluxo, abriu/olhou os CSVs e usou IA sobre os dados. Quando, com qual ferramenta e o que foi observado não foram detalhados (pendente). Portanto, este não é um registro cego e as hipóteses podem ter sido influenciadas por essa exploração. Ver DEC-008.
 - Neste fluxo, até a revisão, os dados foram só baixados e conferidos por tamanho e SHA-256; nenhum valor foi lido.
 
+## Hipótese nova — registrada em 2026-10-26 19:14 (S-006), exploratória
+| ID / origem | Hipótese | Como surgiu |
+|---|---|---|
+| H10 / Claude Code, exploratória | O churn segue o mecanismo do gerador do dataset: ~1,2 evento por conta em datas uniformes entre o signup e o fim dos dados. | Surgiu ao ver que só o tempo de casa diferia (H04) e que o churn subia em todas as faixas de tempo de casa. Não fazia parte do pré-registro. |
+
+## Resultados — 2026-10-26 (DAV-184, S-006)
+Testes conforme o pré-registro EXP-001 (process-log/experiments/), sobre desenvolvimento e validação; teste final reservado. Números em docs/hypotheses-results.md; interpretação em docs/diagnosis-findings.md. Validação da interpretação pelo candidato: pendente.
+
+| H | Status |
+|---|---|
+| H01 | inconclusiva, sem sinal (AUC 0,48 e 0,48) |
+| H02 | inconclusiva (tickets e satisfação sem associação) |
+| H03 | inconclusiva (taxa de erro AUC 0,51 e 0,49) |
+| H04 | apoiada só para tempo de casa < 180 dias; explicada pela H10 |
+| H05 | refutada na forma (julgamento): uso por conta estável; crescimento agregado é composição |
+| H06 | inconclusiva (direção inverte entre períodos) |
+| H07 | inconclusiva (AUC 0,51) |
+| H08 | apoiada (descritivo) |
+| H09 | apoiada |
+| H10 (exploratória) | apoiada |
+
 Documento no Linear: https://linear.app/david-grinberg/document/02-hipoteses-pre-analise-e-protocolo-de-validacao-7e2fa1da7520

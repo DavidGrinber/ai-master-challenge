@@ -1,0 +1,39 @@
+{
+  "h07": {
+    "hypothesis": "H07",
+    "excluded_early_churn": 51,
+    "n": 205,
+    "accounts": 205,
+    "positives": 73,
+    "auc": 0.5116230801162307,
+    "auc_lo": 0.43581530844413213,
+    "auc_hi": 0.5876537660261351
+  },
+  "h09_agreement": {
+    "comparable": 379,
+    "agree": 101,
+    "observed": 0.26649076517150394,
+    "chance_mean": 0.2688390501319261,
+    "p_above_chance": 0.5695,
+    "events_with_pre_snapshot": 542,
+    "events_total": 600
+  },
+  "accounts_attention": {
+    "date": "2024-12-31",
+    "accounts_now": 500,
+    "new_accounts": 149,
+    "new_mrr": 3124317,
+    "total_mrr": 10159608
+  },
+  "h10": {
+    "k": 1.2,
+    "position_quantiles": {
+      "0.1": 0.107,
+      "0.25": 0.256,
+      "0.5": 0.498,
+      "0.75": 0.762,
+      "0.9": 0.9
+    },
+    "curve_corr": 0.5690049627297067
+  }
+}

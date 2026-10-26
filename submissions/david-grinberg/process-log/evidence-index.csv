@@ -23,3 +23,9 @@ E-021,S-004,DAV-181,Dicionário gerado,docs/analytic-base-dictionary.md,gerado
 E-022,S-004,DAV-181,Testes da base analítica + mutação do teste de vazamento,solution/tests/test_analytic_base.py,20 passed; mutação detectada
 E-023,S-005,DAV-201,Revisão do candidato dos tratamentos (formulário de 4 perguntas),docs/decision-log.md (DEC-017; DEC-018),decidido
 E-024,S-005,DAV-181,Impacto da DEC-018 nos rótulos e MRR (comparação com afa8cb0),process-log/sessions/S-005-revisao-do-tratamento.md,só MRR do corte final mudou (+8544)
+E-025,S-006,DAV-184,Pré-registro das hipóteses e partição temporal,process-log/experiments/EXP-001-hipoteses-pre-registro.md,escrito antes das comparações (19:09)
+E-026,S-006,DAV-184,Resultados gerados H01-H10 + carteira por MRR,docs/hypotheses-results.md,gerado
+E-027,S-006,DAV-184,Tabelas do diagnóstico,solution/outputs/diagnosis/,gerado (semente fixa)
+E-028,S-006,DAV-184,Interpretação e matriz de hipóteses,docs/diagnosis-findings.md,escrita; validação do candidato pendente
+E-029,S-006,DAV-184,Contas no segmento de risco maior por MRR,solution/outputs/diagnosis/accounts_attention.csv,gerado (não é score)
+E-030,S-006,DAV-184,Testes estatísticos e da partição,solution/tests/test_diagnose.py,33 passed (suíte completa)

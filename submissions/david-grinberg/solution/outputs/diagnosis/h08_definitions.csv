@@ -1,0 +1,5 @@
+definition,value,denominator
+accounts.churn_flag = True,110,500
+contas com >= 1 evento em churn_events,352,500
+eventos de churn (total),600,500
+contas com evento e churn_flag = False,277,352

@@ -1,0 +1,7 @@
+signal,description,part,n,accounts,positives,auc,auc_lo,auc_hi
+generator_hazard,risco do gerador: 30 / dias entre signup e fim dos dados (não é feature),desenvolvimento,2338,310,158,0.592923,0.551914,0.639285
+neg_tenure,tempo de casa curto,desenvolvimento,2338,310,158,0.566605,0.520176,0.616382
+prior_churn_events,churns anteriores,desenvolvimento,2338,310,158,0.494031,0.45231,0.529629
+generator_hazard,risco do gerador: 30 / dias entre signup e fim dos dados (não é feature),validação,1087,385,104,0.616505,0.561295,0.671306
+neg_tenure,tempo de casa curto,validação,1087,385,104,0.613282,0.556608,0.667987
+prior_churn_events,churns anteriores,validação,1087,385,104,0.424099,0.381577,0.472859

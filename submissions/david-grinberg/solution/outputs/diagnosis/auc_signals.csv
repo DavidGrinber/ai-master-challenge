@@ -1,0 +1,29 @@
+hypothesis,signal,description,primary,part,n,accounts,positives,auc,auc_lo,auc_hi
+H01,rel_drop_30d,"queda relativa de uso 30d vs 30d anteriores (base > 0, tenure >= 60d)",True,desenvolvimento,1761,276,118,0.481604,0.434315,0.529179
+H01,rel_drop_30d,"queda relativa de uso 30d vs 30d anteriores (base > 0, tenure >= 60d)",True,validação,847,342,75,0.480276,0.41307,0.553339
+H01,rel_drop_14d,queda relativa 14d vs 14d anteriores,False,desenvolvimento,1280,271,83,0.443302,0.388867,0.496451
+H01,rel_drop_14d,queda relativa 14d vs 14d anteriores,False,validação,612,323,57,0.466825,0.393018,0.546178
+H01,rel_drop_7d,queda relativa 7d vs 7d anteriores,False,desenvolvimento,779,246,59,0.574353,0.510163,0.632321
+H01,rel_drop_7d,queda relativa 7d vs 7d anteriores,False,validação,372,250,30,0.534893,0.445743,0.627429
+H01,abs_drop_30d,queda absoluta de usage_count 30d,False,desenvolvimento,2338,310,158,0.481904,0.449009,0.519245
+H01,abs_drop_30d,queda absoluta de usage_count 30d,False,validação,1087,385,104,0.517754,0.463478,0.571317
+H01,days_since_last_usage,dias desde o último uso,False,desenvolvimento,2338,310,158,0.49562,0.449674,0.542398
+H01,days_since_last_usage,dias desde o último uso,False,validação,1087,385,104,0.495843,0.440761,0.554026
+H02,neg_satisfaction_90d,"satisfação média baixa (fechados em 90d, com resposta)",True,desenvolvimento,582,183,35,0.48245,0.39513,0.585102
+H02,neg_satisfaction_90d,"satisfação média baixa (fechados em 90d, com resposta)",True,validação,273,140,33,0.473106,0.367885,0.577141
+H02,mean_resolution_hours_90d,tempo médio de resolução (90d),False,desenvolvimento,892,240,58,0.436813,0.36231,0.508849
+H02,mean_resolution_hours_90d,tempo médio de resolução (90d),False,validação,419,210,45,0.46836,0.370417,0.563165
+H02,mean_first_response_min_90d,primeira resposta média (90d),False,desenvolvimento,892,240,58,0.548675,0.466329,0.622756
+H02,mean_first_response_min_90d,primeira resposta média (90d),False,validação,419,210,45,0.549168,0.448691,0.640906
+H02,escalations_90d,escalonamentos (90d),False,desenvolvimento,2338,310,158,0.495317,0.488178,0.507301
+H02,escalations_90d,escalonamentos (90d),False,validação,1087,385,104,0.506006,0.487703,0.529454
+H02,tickets_urgent_high_90d,tickets urgent/high (90d),False,desenvolvimento,2338,310,158,0.517748,0.48203,0.549574
+H02,tickets_urgent_high_90d,tickets urgent/high (90d),False,validação,1087,385,104,0.507845,0.467981,0.549545
+H02,open_tickets,tickets abertos no corte,False,desenvolvimento,2338,310,158,0.504494,0.497606,0.514705
+H02,open_tickets,tickets abertos no corte,False,validação,1087,385,104,0.502773,0.496421,0.516159
+H03,error_rate_30d,taxa de erro em 30d (erros / usos),True,desenvolvimento,2018,307,133,0.505084,0.450155,0.555765
+H03,error_rate_30d,taxa de erro em 30d (erros / usos),True,validação,921,373,88,0.489366,0.417208,0.555253
+H03,errors_90d,erros em 90d,False,desenvolvimento,2338,310,158,0.496037,0.449915,0.543657
+H03,errors_90d,erros em 90d,False,validação,1087,385,104,0.469858,0.418683,0.529478
+H03,beta_rows_30d,uso de feature beta em 30d,False,desenvolvimento,2338,310,158,0.507142,0.478328,0.534589
+H03,beta_rows_30d,uso de feature beta em 30d,False,validação,1087,385,104,0.483469,0.449844,0.521448

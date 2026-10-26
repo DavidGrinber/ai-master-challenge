@@ -50,6 +50,8 @@ Fluxo: `raw/` → `clean_data.py` → `processed/clean/` → `analytic_base.py` 
 - **Premissas do candidato (DEC-015), obrigatórias:** P-01 churn = evento em `churn_events`; P-02 MRR da conta = soma das assinaturas ativas em t, com as 4 cópias exatas contadas como legítimas (DEC-018); P-03 uso e tickets pela data do próprio evento. Detalhes, elegibilidade, rótulos e campos proibidos em `docs/data-contract.md`.
 - Ler sempre a base limpa (`clean_data.load_clean`), nunca reimplementar o parsing dos originais. Colunas `q_*` são flags de qualidade: não apagar as linhas marcadas sem decisão registrada. `q_is_duplicate` é só informativo: não exclui nada (DEC-018).
 - Limitações conhecidas (detalhe em `docs/data-treatment-log.md`): datas de uso e tickets fora do ciclo da conta; `churn_flag` e `is_reactivation` contraditórios; assinaturas sobrepostas (MRR da conta ambíguo); `reason_code` incoerente com `feedback_text`; satisfação só com notas 3–5. Citar essas limitações em qualquer conclusão que dependa delas.
+- **Teste final reservado (DEC-019):** cortes de 2024-09-30 a 2024-11-30 só podem ser usados na avaliação final da DAV-189. Nenhuma exploração, escolha de feature ou limiar olha esses cortes.
+- **O "risco do gerador" (H10)** usa o fim dos dados e é proibido como feature. Achados em `docs/diagnosis-findings.md`.
 - pandas 3.x: `str` é o dtype padrão para texto e copy-on-write está sempre ativo. Parsear datas explicitamente.
 
 ## Ambiente e comandos
@@ -66,6 +68,7 @@ Verificados na sessão S-002 (saídas em `process-log/sessions/S-002-claude-code
 | `.venv/bin/python solution/src/raw_data.py verify` | confere presença, tamanho e SHA-256 contra o manifest; exit 1 se divergir |
 | `.venv/bin/python solution/src/clean_data.py` | gera `processed/clean/`, `outputs/data_quality/` e `docs/data-quality-report.md`; recusa rodar se os originais divergirem (S-003) |
 | `.venv/bin/python solution/src/analytic_base.py` | gera snapshots, perfil retrospectivo, reconciliação (15 checagens), contagem de rótulos e `docs/analytic-base-dictionary.md`; exige a base limpa conferida por hash (S-004) |
+| `.venv/bin/python solution/src/diagnose.py` | testa H01–H10 conforme o EXP-001 (bootstrap agrupado por conta) e gera `outputs/diagnosis/` e `docs/hypotheses-results.md`; ~15 s (S-006) |
 | `.venv/bin/python -m pytest` | testes de `solution/tests/` |
 | `sh scripts/stage.sh` | prepara o commit e falha se algo fora da pasta estiver preparado |
 | `uv pip compile requirements.in --universal --python-version 3.12 --exclude-newer <AAAA-MM-DD> -o requirements.txt` | recompila o lock, apenas com versões publicadas até a data |

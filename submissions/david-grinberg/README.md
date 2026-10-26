@@ -51,6 +51,7 @@ Os dados se contradizem em pontos que mudam o resultado. Sem orientação do res
   - O motivo declarado e o feedback concordam em só 101 de 379 casos.
   - A satisfação só tem notas de 3 a 5.
   - Nada foi apagado: cada problema está marcado por linha.
+- O churn dos dados segue um padrão compatível com o gerador do dataset: cerca de 1,2 evento por conta, em datas uniformes entre o cadastro e o fim dos dados. Nenhum comportamento (uso, suporte, satisfação, erros) antecipa o churn ([achados](docs/diagnosis-findings.md)).
 - _Demais limitações: pendentes._
 
 ### Como reproduzir

@@ -1,0 +1,5 @@
+part,group,n,accounts,positives,rate,n_rest,positives_rest,rate_rest,rr,rr_lo,rr_hi
+desenvolvimento,base anterior zero (prev 30d = 0),335,175,20,0.0597015,2003,138,0.0688967,0.866537,0.50372,1.30394
+desenvolvimento,conta nova (tenure < 60d),274,192,24,0.0875912,2064,134,0.0649225,1.34917,0.867298,1.90931
+validação,base anterior zero (prev 30d = 0),153,126,16,0.104575,934,88,0.0942184,1.10992,0.592723,1.72623
+validação,conta nova (tenure < 60d),108,79,19,0.175926,979,85,0.0868233,2.02625,1.25115,3.07881

@@ -1,0 +1,7 @@
+reason,behavior,expected,n_group,mean_group,mean_rest,ratio,ratio_lo,ratio_hi,expected_met
+support,tickets_90d,mais tickets,98,0.540816,0.511261,1.05781,0.804107,1.33298,False
+support,mean_satisfaction_90d,satisfação menor,26,4.32692,4.02119,1.07603,0.999622,1.14802,False
+features,distinct_features_30d,menos features usadas,103,2.08738,2.04784,1.01931,0.858784,1.18205,False
+features,usage_count_30d,menos uso,103,21.4563,20.6355,1.03977,0.861625,1.23422,False
+pricing,mrr_active,MRR maior,83,9414.52,11358.6,0.828842,0.632129,1.06456,False
+budget,mrr_active,MRR maior,91,11668.8,10938.3,1.06678,0.855039,1.31682,False
