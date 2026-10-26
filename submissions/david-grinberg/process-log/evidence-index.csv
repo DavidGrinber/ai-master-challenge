@@ -21,3 +21,5 @@ E-019,S-004,DAV-181,Reconciliação da base analítica,solution/outputs/analytic
 E-020,S-004,DAV-181,Rótulos e elegíveis por corte,solution/outputs/analytic_base/label_counts.csv,conferido com a S-003
 E-021,S-004,DAV-181,Dicionário gerado,docs/analytic-base-dictionary.md,gerado
 E-022,S-004,DAV-181,Testes da base analítica + mutação do teste de vazamento,solution/tests/test_analytic_base.py,20 passed; mutação detectada
+E-023,S-005,DAV-201,Revisão do candidato dos tratamentos (formulário de 4 perguntas),docs/decision-log.md (DEC-017; DEC-018),decidido
+E-024,S-005,DAV-181,Impacto da DEC-018 nos rótulos e MRR (comparação com afa8cb0),process-log/sessions/S-005-revisao-do-tratamento.md,só MRR do corte final mudou (+8544)

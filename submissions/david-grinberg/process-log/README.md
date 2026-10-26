@@ -19,5 +19,6 @@ Evidência de como a IA foi usada, uma sessão ou etapa por arquivo. Só registr
 | [S-002](sessions/S-002-claude-code-harness.md) | Claude Code | DAV-178 | fork, branch, revisão das hipóteses, aquisição verificada dos CSVs, harness |
 | [S-003](sessions/S-003-auditoria-e-limpeza.md) | Claude Code | DAV-181, DAV-201 | auditoria estrutural; base limpa com flags, relatório de qualidade e registro de tratamento |
 | [S-004](sessions/S-004-premissas-e-base-analitica.md) | Claude Code | DAV-181 | premissas P-01 a P-03; snapshots conta × corte e perfil retrospectivo, reconciliados e sem vazamento |
+| [S-005](sessions/S-005-revisao-do-tratamento.md) | Claude Code | DAV-181, DAV-201 | revisão do candidato: elegibilidade e tratamentos aprovados; cópias exatas de assinatura passam a contar como legítimas |
 
 Decisões: [`../docs/decision-log.md`](../docs/decision-log.md). Hipóteses: [`../docs/02-hipoteses.md`](../docs/02-hipoteses.md).

@@ -37,7 +37,7 @@ _Pendente (DAV-198)._
 Os dados se contradizem em pontos que mudam o resultado. Sem orientação do responsável pelo case, estas premissas foram adotadas por decisão minha ([DEC-015](docs/decision-log.md); detalhes em [data-contract.md](docs/data-contract.md)):
 
 1. **Churn = evento registrado em `churn_events`, com data.** O `churn_flag` das contas contradiz os eventos em 312 de 500 contas e fica só como campo descritivo.
-2. **MRR da conta = soma das assinaturas ativas na data, sem as 4 duplicatas.** As assinaturas se sobrepõem (média de 9 ativas por conta), então o valor absoluto é um artefato do dataset simulado.
+2. **MRR da conta = soma das assinaturas ativas na data.** As 4 assinaturas que são cópias exatas de outras contam como legítimas, porque não há como provar que são erro ([DEC-018](docs/decision-log.md)). As assinaturas se sobrepõem (média de 9 ativas por conta), então o valor absoluto é um artefato do dataset simulado.
 3. **Uso e tickets entram pela data do próprio evento**, embora metade deles seja anterior ao cadastro da conta. Conclusões que dependem dessas datas carregam essa ressalva.
 
 ### Limitações

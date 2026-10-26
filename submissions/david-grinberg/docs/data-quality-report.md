@@ -22,7 +22,7 @@ Fim da observação (última data nas tabelas): **2024-12-31**. Nenhuma linha re
 | A-04 | accounts | churn_flag contradiz a existência de churn_events | 312 | 500 | churn_flag preservado; flag q_churn_flag_conflict (TR-10) | limitação |
 | S-01 | subscriptions | subscription_id duplicado | 0 | 5000 | nenhum | ok |
 | S-02 | subscriptions | account_id sem conta (órfão) | 0 | 5000 | nenhum | ok |
-| S-03 | subscriptions | cópia exata de outra assinatura (todos os campos exceto o id) | 4 | 5000 | mantida; q_duplicate_of aponta a original; excluir de somas de receita (TR-04) | tratado |
+| S-03 | subscriptions | cópia exata de outra assinatura (todos os campos exceto o id) | 4 | 5000 | mantida e tratada como legítima por decisão do candidato; q_duplicate_of só informa a cópia (TR-04) | mantido |
 | S-04 | subscriptions | churn_flag diverge de ter end_date | 0 | 5000 | nenhum | ok |
 | S-05 | subscriptions | start_date antes do signup da conta | 0 | 5000 | nenhum | ok |
 | S-06 | subscriptions | end_date antes de start_date | 0 | 5000 | nenhum | ok |
@@ -36,7 +36,7 @@ Fim da observação (última data nas tabelas): **2024-12-31**. Nenhuma linha re
 | U-05 | feature_usage | uso datado antes do signup da conta | 13198 | 25000 | mantido; flag q_before_account_signup (TR-09) | limitação |
 | U-06 | feature_usage | uso datado antes do início da assinatura | 19142 | 25000 | mantido; flag q_before_subscription_start (TR-09) | limitação |
 | U-07 | feature_usage | uso datado depois do fim da assinatura | 290 | 25000 | mantido; flag q_after_subscription_end (TR-09) | limitação |
-| U-08 | feature_usage | uso ligado a uma assinatura duplicada | 22 | 25000 | mantido e atribuído à conta normalmente (TR-04) | mantido |
+| U-08 | feature_usage | uso ligado a uma assinatura duplicada | 22 | 25000 | mantido; a assinatura conta como legítima (TR-04) | mantido |
 | U-09 | feature_usage | usage_count = 0 | 2 | 25000 | mantido | mantido |
 | U-10 | subscriptions | assinatura sem nenhuma linha de uso | 33 | 5000 | mantida; ausência de linha não é uso zero (TR-11) | mantido |
 | T-01 | support_tickets | ticket_id duplicado | 0 | 2000 | nenhum | ok |

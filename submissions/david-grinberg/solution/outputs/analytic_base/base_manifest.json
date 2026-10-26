@@ -33,7 +33,7 @@
     60,
     90
   ],
-  "eligibility": "signup_date <= t e >= 1 assinatura (sem duplicatas) com start_date <= t e end_date vazio ou > t",
+  "eligibility": "signup_date <= t e >= 1 assinatura com start_date <= t e end_date vazio ou > t",
   "lineage": {
     "derived_manifest_sha256": "a3ce685186896b1134eb6047ab867e6713faee3c346618cfc487b6633d1f3933"
   },
@@ -41,7 +41,7 @@
     "snapshots": {
       "rows": 5254,
       "purpose": "Uma linha por conta elegível e data de corte. Features só com eventos até t; rótulos em (t, t+H]. Base para o modelo (DAV-189) e para comparações temporais (DAV-184). O corte no fim dos dados não tem rótulo: é a carteira a pontuar.",
-      "sha256": "be5f439a83ac00ea9abd84904872a3340df9a197829b51d2cdba713546866743",
+      "sha256": "c5db01421d8fe5c4781abfb98aa4654a35a1f53caa2cedf130c742503af5ae4a",
       "columns": {
         "account_id": "str",
         "cutoff_date": "datetime",
@@ -94,7 +94,7 @@
     "accounts_retrospective": {
       "rows": 500,
       "purpose": "Uma linha por conta com o período todo. **Retrospectiva**: mistura informação anterior e posterior ao churn; serve ao diagnóstico, nunca como feature de previsão.",
-      "sha256": "6e61dcdaae08ec5f31f72c2d31ed8005829523ddde67e78092f3dba6fceaefad",
+      "sha256": "0adcf6d73a89452df9cbc07e9e71114272106262dd50e4e9bea1f8a92a4e5889",
       "columns": {
         "account_id": "str",
         "account_name": "str",

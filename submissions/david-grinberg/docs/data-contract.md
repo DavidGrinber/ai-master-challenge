@@ -7,7 +7,7 @@ Adotadas porque os dados não resolvem estas ambiguidades e o responsável pelo 
 | ID | Premissa | Por que é necessária |
 |---|---|---|
 | P-01 | **Churn = evento em `churn_events`**, com data. `accounts.churn_flag` fica só como campo descritivo e é proibido como alvo ou preditor. | É a única fonte de churn com data e motivo. `churn_flag` contradiz os eventos em 312 de 500 contas, e nenhuma conta encerra todas as assinaturas (A-04, C-11). |
-| P-02 | **MRR da conta em t = soma do `mrr_amount` das assinaturas ativas em t**, excluídas as 4 duplicatas exatas. | 4.992 de 5.000 assinaturas se sobrepõem a outra da mesma conta (S-09). O valor absoluto é alto (US$ 10,15 milhões/mês no fim de 2024) e deve ser lido como artefato do dataset simulado. |
+| P-02 | **MRR da conta em t = soma do `mrr_amount` das assinaturas ativas em t.** As 4 cópias exatas (S-03) contam como assinaturas legítimas (DEC-018, que revisa a versão inicial "sem duplicatas"). | 4.992 de 5.000 assinaturas se sobrepõem a outra da mesma conta (S-09). O valor absoluto é alto (US$ 10,16 milhões/mês no fim de 2024) e deve ser lido como artefato do dataset simulado. As cópias somam US$ 8.544 e só existem no corte de 2024-12-31. |
 | P-03 | **Uso e tickets entram pela data do próprio evento**, mesmo quando ela cai fora do ciclo da conta ou da assinatura. | 52,8% do uso e 53,9% dos tickets são anteriores ao signup (U-05, T-03). Apagar essas linhas eliminaria metade dos dados; mover as datas inventaria dados. |
 
 ## Fontes e estrutura
@@ -20,9 +20,9 @@ Adotadas porque os dados não resolvem estas ambiguidades e o responsável pelo 
   - churn_events: 1 linha por evento, até 5 por conta.
 - Qualidade e tratamento: `docs/data-quality-report.md` e `docs/data-treatment-log.md`. Leitura: `clean_data.load_clean()`.
 
-## Unidade, população e datas (DEC-016, proposta pendente de revisão)
+## Unidade, população e datas (DEC-016; elegibilidade aprovada pelo candidato em DEC-017)
 - **Unidade de previsão:** conta × data de corte t. As datas de corte são os fins de mês de 31/01/2023 a 31/12/2024 (24 cortes). Tudo o que é conhecido "em t" tem data ≤ t, considerando o dia t inteiro.
-- **Elegível em t:** `signup_date` ≤ t e pelo menos uma assinatura sem duplicata com `start_date` ≤ t e `end_date` vazio ou > t. Parâmetro em `analytic_base.eligible_accounts`.
+- **Elegível em t:** `signup_date` ≤ t e pelo menos uma assinatura com `start_date` ≤ t e `end_date` vazio ou > t. Parâmetro em `analytic_base.eligible_accounts`.
 - **Rótulo:** `churn_next_{H}d` = algum evento de churn em (t, t+H], para H ∈ {30, 60, 90}. Fica **nulo** (censurado) quando t+H passa do fim dos dados (2024-12-31): o rótulo nunca é "não churn" sem acompanhamento completo.
 - **Reativação e múltiplos eventos:** a conta continua elegível depois de um churn, porque segue com assinatura ativa, e pode churnar de novo. O histórico entra como `prior_churn_events` e `days_since_last_churn`. Usa-se `event_seq`, nunca `is_reactivation`, que é contraditório (C-05, C-06).
 - **Trial:** contas e assinaturas em trial são elegíveis; `n_active_trial_subs` identifica esses casos.

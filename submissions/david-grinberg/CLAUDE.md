@@ -47,8 +47,8 @@ Fluxo: `raw/` → `clean_data.py` → `processed/clean/` → `analytic_base.py` 
   - Split temporal; preprocessing ajustado só no treino; limiar escolhido na validação, nunca no teste.
   - "Probabilidade" só com calibração validada; caso contrário, exibir score/ranking.
   - Correlação, importância de variável e motivo declarado não provam causa. Risco previsto não mede efeito de intervenção.
-- **Premissas do candidato (DEC-015), obrigatórias:** P-01 churn = evento em `churn_events`; P-02 MRR da conta = soma das assinaturas ativas em t, sem duplicatas; P-03 uso e tickets pela data do próprio evento. Detalhes, elegibilidade, rótulos e campos proibidos em `docs/data-contract.md`.
-- Ler sempre a base limpa (`clean_data.load_clean`), nunca reimplementar o parsing dos originais. Colunas `q_*` são flags de qualidade: não apagar as linhas marcadas sem decisão registrada. Excluir `q_is_duplicate` de qualquer soma de receita.
+- **Premissas do candidato (DEC-015), obrigatórias:** P-01 churn = evento em `churn_events`; P-02 MRR da conta = soma das assinaturas ativas em t, com as 4 cópias exatas contadas como legítimas (DEC-018); P-03 uso e tickets pela data do próprio evento. Detalhes, elegibilidade, rótulos e campos proibidos em `docs/data-contract.md`.
+- Ler sempre a base limpa (`clean_data.load_clean`), nunca reimplementar o parsing dos originais. Colunas `q_*` são flags de qualidade: não apagar as linhas marcadas sem decisão registrada. `q_is_duplicate` é só informativo: não exclui nada (DEC-018).
 - Limitações conhecidas (detalhe em `docs/data-treatment-log.md`): datas de uso e tickets fora do ciclo da conta; `churn_flag` e `is_reactivation` contraditórios; assinaturas sobrepostas (MRR da conta ambíguo); `reason_code` incoerente com `feedback_text`; satisfação só com notas 3–5. Citar essas limitações em qualquer conclusão que dependa delas.
 - pandas 3.x: `str` é o dtype padrão para texto e copy-on-write está sempre ativo. Parsear datas explicitamente.
 

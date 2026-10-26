@@ -25,9 +25,10 @@ def test_eligibility_needs_signup_and_active_subscription(clean_tables):
     assert ab.snapshot_at(clean_tables, ts("2024-01-31"), END)["account_id"].tolist() == ["A1", "A2"]
 
 
-def test_duplicate_subscription_never_counts_as_revenue(clean_tables):
+def test_exact_copies_count_as_legitimate_subscriptions(clean_tables):
+    # DEC-018: o candidato decidiu tratar as cópias exatas como assinaturas legítimas.
     a1 = row(ab.snapshot_at(clean_tables, ts("2024-02-29"), END), "A1")
-    assert a1["n_active_subs"] == 2 and a1["mrr_active"] == 300  # S1 + S2; S3 é cópia de S2
+    assert a1["n_active_subs"] == 3 and a1["mrr_active"] == 500  # S1 + S2 + S3 (cópia de S2)
 
 
 def test_labels_look_forward_and_are_null_when_censored(clean_tables):
@@ -96,7 +97,7 @@ def test_real_base_reconciles_and_is_deterministic(tmp_path):
     assert counts.loc["2024-10-31", ["eligible", "positives_30d", "positives_60d"]].tolist() == [439, 48, 97]
 
     snaps = clean_data.read_typed(tmp_path / "a" / "p" / "snapshots.csv", manifest["tables"]["snapshots"]["columns"])
-    real_active = tables["subscriptions"].query("end_date.isna() and not q_is_duplicate")["mrr_amount"].sum()
-    assert snaps.loc[snaps["cutoff_date"] == end, "mrr_active"].sum() == real_active == 10151064
+    open_mrr = tables["subscriptions"].query("end_date.isna()")["mrr_amount"].sum()
+    assert snaps.loc[snaps["cutoff_date"] == end, "mrr_active"].sum() == open_mrr == 10159608
     assert hashlib.sha256((tmp_path / "a" / "p" / "snapshots.csv").read_bytes()).hexdigest() == manifest["tables"]["snapshots"]["sha256"]
     json.dumps(manifest)

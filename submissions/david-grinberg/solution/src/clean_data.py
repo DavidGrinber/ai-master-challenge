@@ -105,7 +105,7 @@ def clean(raw: dict[str, pd.DataFrame]) -> tuple[dict[str, pd.DataFrame], list[d
     sub["q_is_duplicate"] = sub["q_duplicate_of"].notna()
     n = int(sub["q_is_duplicate"].sum())
     check("S-03", "subscriptions", "cópia exata de outra assinatura (todos os campos exceto o id)", n, len(sub),
-          "mantida; q_duplicate_of aponta a original; excluir de somas de receita (TR-04)", _status(n, "tratado"))
+          "mantida e tratada como legítima por decisão do candidato; q_duplicate_of só informa a cópia (TR-04)", _status(n, "mantido"))
     n = int((sub["end_date"].notna() != sub["churn_flag"]).sum())
     check("S-04", "subscriptions", "churn_flag diverge de ter end_date", n, len(sub), "nenhum", _status(n, "limitação"))
     n = int((sub["start_date"] < sub["account_id"].map(signup)).sum())
@@ -159,7 +159,7 @@ def clean(raw: dict[str, pd.DataFrame]) -> tuple[dict[str, pd.DataFrame], list[d
         check(cid, "feature_usage", desc, n, len(fu), f"mantido; flag {col} (TR-09)", _status(n, "limitação"))
     n = int(fu["q_on_duplicate_subscription"].sum())
     check("U-08", "feature_usage", "uso ligado a uma assinatura duplicada", n, len(fu),
-          "mantido e atribuído à conta normalmente (TR-04)", _status(n, "mantido"))
+          "mantido; a assinatura conta como legítima (TR-04)", _status(n, "mantido"))
     n = int((fu["usage_count"] == 0).sum())
     check("U-09", "feature_usage", "usage_count = 0", n, len(fu), "mantido", _status(n, "mantido"))
     n = int((~sub["subscription_id"].isin(fu["subscription_id"])).sum())
@@ -228,7 +228,7 @@ def clean(raw: dict[str, pd.DataFrame]) -> tuple[dict[str, pd.DataFrame], list[d
     n = int((ce["q_feedback_matches_reason"] == False).sum())  # noqa: E712 (NA fica de fora)
     check("C-09", "churn_events", "feedback_text incompatível com reason_code", n, int(comparable.sum()),
           "ambos preservados; flag q_feedback_matches_reason (TR-12)", _status(n, "limitação"))
-    ended = sub.loc[~sub["q_is_duplicate"] & sub["end_date"].notna(), ["account_id", "end_date"]]
+    ended = sub.loc[sub["end_date"].notna(), ["account_id", "end_date"]]
     gaps = ce[["churn_event_id", "account_id", "churn_date"]].merge(ended, on="account_id", how="left")
     gaps["days"] = (gaps["end_date"] - gaps["churn_date"]).dt.days.abs()
     ce["q_days_to_nearest_subscription_end"] = ce["churn_event_id"].map(gaps.groupby("churn_event_id")["days"].min()).astype("Int64")

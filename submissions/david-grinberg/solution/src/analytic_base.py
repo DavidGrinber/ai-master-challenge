@@ -2,7 +2,8 @@
 
 Premissas do candidato (DEC-015, P-01 a P-03 em docs/data-contract.md):
     P-01 churn = evento em churn_events (com data); churn_flag só descritivo.
-    P-02 MRR da conta em t = soma do mrr_amount das assinaturas ativas em t, sem duplicatas.
+    P-02 MRR da conta em t = soma do mrr_amount das assinaturas ativas em t; as 4 cópias exatas
+         contam como assinaturas legítimas (DEC-018).
     P-03 uso e tickets entram pela data do próprio evento, mesmo fora do ciclo da conta.
 Proposta pendente de revisão (DEC-016): elegível em t = signup <= t e >= 1 assinatura ativa em t.
 
@@ -48,7 +49,7 @@ SNAPSHOT_COLUMNS = {
     "referral_source": "accounts.referral_source (atributo de cadastro)",
     "plan_tier_initial": "accounts.plan_tier, plano inicial segundo a fonte",
     "tenure_days": "dias entre signup_date e t",
-    "n_active_subs": "assinaturas ativas em t (início <= t e fim vazio ou > t), sem duplicatas",
+    "n_active_subs": "assinaturas ativas em t (início <= t e fim vazio ou > t)",
     "mrr_active": "P-02: soma do mrr_amount das assinaturas ativas em t",
     "seats_active": "soma de seats das assinaturas ativas em t",
     "n_active_trial_subs": "assinaturas ativas em t com is_trial",
@@ -103,7 +104,7 @@ PROFILE_COLUMNS = {
     "n_churn_events": "eventos de churn no período todo",
     "first_churn_date": "primeiro evento de churn",
     "last_churn_date": "último evento de churn",
-    "n_subscriptions": "assinaturas no período todo, sem duplicatas",
+    "n_subscriptions": "assinaturas no período todo",
     "n_active_subs_end": "assinaturas ativas no fim dos dados",
     "mrr_active_end": "P-02: MRR ativo no fim dos dados",
     "usage_rows": "linhas de uso no período todo",
@@ -131,8 +132,7 @@ def _window(df: pd.DataFrame, col: str, t: pd.Timestamp, days: int, skip: int = 
 
 
 def active_subscriptions(sub: pd.DataFrame, t: pd.Timestamp) -> pd.DataFrame:
-    s = sub[~sub["q_is_duplicate"]]
-    return s[(s["start_date"] <= t) & (s["end_date"].isna() | (s["end_date"] > t))]
+    return sub[(sub["start_date"] <= t) & (sub["end_date"].isna() | (sub["end_date"] > t))]
 
 
 def eligible_accounts(acc: pd.DataFrame, sub: pd.DataFrame, t: pd.Timestamp) -> pd.Index:
@@ -161,9 +161,8 @@ def snapshot_at(tables: dict[str, pd.DataFrame], t: pd.Timestamp, end: pd.Timest
         f[f"n_active_{tier.lower()}"] = (act["plan_tier"] == tier).groupby(act["account_id"]).sum()
     f["share_active_annual"] = (act["billing_frequency"] == "annual").groupby(act["account_id"]).mean()
     f["n_active_no_autorenew"] = (~act["auto_renew_flag"]).groupby(act["account_id"]).sum()
-    real = sub[~sub["q_is_duplicate"]]
-    f["n_subs_started_90d"] = _window(real, "start_date", t, 90).groupby("account_id").size()
-    ended = real[real["end_date"].notna()]
+    f["n_subs_started_90d"] = _window(sub, "start_date", t, 90).groupby("account_id").size()
+    ended = sub[sub["end_date"].notna()]
     f["n_subs_ended_90d"] = _window(ended, "end_date", t, 90).groupby("account_id").size()
     closed = _until(ended, "end_date", t).groupby("account_id")
     f["n_upgrade_closed_subs"] = closed["upgrade_flag"].sum()
@@ -234,8 +233,7 @@ def build_profile(tables: dict[str, pd.DataFrame], end: pd.Timestamp) -> pd.Data
     p["n_churn_events"] = ev.size()
     p["first_churn_date"] = ev["churn_date"].min()
     p["last_churn_date"] = ev["churn_date"].max()
-    real = sub[~sub["q_is_duplicate"]]
-    p["n_subscriptions"] = real.groupby("account_id").size()
+    p["n_subscriptions"] = sub.groupby("account_id").size()
     act = active_subscriptions(sub, end).groupby("account_id")
     p["n_active_subs_end"] = act.size()
     p["mrr_active_end"] = act["mrr_amount"].sum()
@@ -262,21 +260,21 @@ def reconcile(tables: dict[str, pd.DataFrame], profile: pd.DataFrame, snaps: pd.
               end: pd.Timestamp) -> list[dict]:
     """Totais da base analítica versus as tabelas limpas: provam que nada foi multiplicado ou perdido."""
     acc, sub, fu, tk, ce = (tables[n] for n in clean_data.TABLES)
-    real = sub[~sub["q_is_duplicate"]]
+    open_mrr = sub.loc[sub["end_date"].isna(), "mrr_amount"].sum()  # independente de active_subscriptions
     last = snaps[snaps["cutoff_date"] == end]
     rows = [
         ("perfil: contas", len(acc), len(profile)),
         ("perfil: account_id único", 1, int(profile["account_id"].is_unique)),
         ("perfil: eventos de churn", len(ce), profile["n_churn_events"].sum()),
-        ("perfil: assinaturas sem duplicatas", len(real), profile["n_subscriptions"].sum()),
-        ("perfil: MRR ativo no fim", active_subscriptions(sub, end)["mrr_amount"].sum(), profile["mrr_active_end"].sum()),
+        ("perfil: assinaturas", len(sub), profile["n_subscriptions"].sum()),
+        ("perfil: MRR ativo no fim (assinaturas sem end_date)", open_mrr, profile["mrr_active_end"].sum()),
         ("perfil: linhas de uso", len(fu), profile["usage_rows"].sum()),
         ("perfil: usage_count", fu["usage_count"].sum(), profile["usage_count"].sum()),
         ("perfil: error_count", fu["error_count"].sum(), profile["errors"].sum()),
         ("perfil: tickets", len(tk), profile["tickets"].sum()),
         ("snapshots: (account_id, cutoff_date) único", 1, int(not snaps.duplicated(["account_id", "cutoff_date"]).any())),
         (f"snapshots em {end.date()}: contas elegíveis", len(eligible_accounts(acc, sub, end)), len(last)),
-        (f"snapshots em {end.date()}: MRR ativo", active_subscriptions(sub, end)["mrr_amount"].sum(), last["mrr_active"].sum()),
+        (f"snapshots em {end.date()}: MRR ativo", open_mrr, last["mrr_active"].sum()),
         (f"snapshots em {end.date()}: linhas de uso até t", len(_until(fu[fu["account_id"].isin(last["account_id"])], "usage_date", end)), last["usage_rows_to_date"].sum()),
         (f"snapshots em {end.date()}: tickets até t", len(_until(tk[tk["account_id"].isin(last["account_id"])], "submitted_at", end)), last["tickets_to_date"].sum()),
         (f"snapshots em {end.date()}: eventos de churn até t", len(_until(ce[ce["account_id"].isin(last["account_id"])], "churn_date", end)), last["prior_churn_events"].sum()),
@@ -319,7 +317,7 @@ def write(profile: pd.DataFrame, snaps: pd.DataFrame, checks: list[dict], counts
     manifest = {"generated_by": "solution/src/analytic_base.py", "pandas": pd.__version__,
                 "data_end": str(end.date()), "cutoffs": [str(t.date()) for t in cutoffs],
                 "horizons_days": list(HORIZONS),
-                "eligibility": "signup_date <= t e >= 1 assinatura (sem duplicatas) com start_date <= t e end_date vazio ou > t",
+                "eligibility": "signup_date <= t e >= 1 assinatura com start_date <= t e end_date vazio ou > t",
                 "lineage": lineage, "tables": {}}
     for name, df in (("snapshots", snaps), ("accounts_retrospective", profile)):
         data = clean_data.to_csv_text(df).encode("utf-8")

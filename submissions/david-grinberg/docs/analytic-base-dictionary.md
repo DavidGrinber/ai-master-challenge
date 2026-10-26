@@ -15,7 +15,7 @@ Uma linha por conta elegível e data de corte. Features só com eventos até t; 
 | `referral_source` | str | accounts.referral_source (atributo de cadastro) |
 | `plan_tier_initial` | str | accounts.plan_tier, plano inicial segundo a fonte |
 | `tenure_days` | int64 | dias entre signup_date e t |
-| `n_active_subs` | int64 | assinaturas ativas em t (início <= t e fim vazio ou > t), sem duplicatas |
+| `n_active_subs` | int64 | assinaturas ativas em t (início <= t e fim vazio ou > t) |
 | `mrr_active` | int64 | P-02: soma do mrr_amount das assinaturas ativas em t |
 | `seats_active` | int64 | soma de seats das assinaturas ativas em t |
 | `n_active_trial_subs` | int64 | assinaturas ativas em t com is_trial |
@@ -76,7 +76,7 @@ Uma linha por conta com o período todo. **Retrospectiva**: mistura informação
 | `n_churn_events` | int64 | eventos de churn no período todo |
 | `first_churn_date` | datetime | primeiro evento de churn |
 | `last_churn_date` | datetime | último evento de churn |
-| `n_subscriptions` | int64 | assinaturas no período todo, sem duplicatas |
+| `n_subscriptions` | int64 | assinaturas no período todo |
 | `n_active_subs_end` | int64 | assinaturas ativas no fim dos dados |
 | `mrr_active_end` | int64 | P-02: MRR ativo no fim dos dados |
 | `usage_rows` | int64 | linhas de uso no período todo |
