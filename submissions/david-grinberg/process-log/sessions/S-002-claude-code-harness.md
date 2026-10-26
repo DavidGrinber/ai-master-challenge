@@ -98,3 +98,12 @@ Não cronometrado. Timestamps observados (-03:00): clone 16:28; commit 930e594 1
 ## Commit
 - 930e594: import do kit.
 - Harness: SHA e verificação do push na seção "Fechamento", acrescentada no commit seguinte.
+
+## Fechamento (acrescentado após o push)
+- Commit do harness: `660ed311a8a06c96066b4cde10dcedfbff2c898f`, enviado com `git push -u origin submission/david-grinberg` (nova branch, sem force).
+- Verificação: `git rev-parse HEAD` = `git ls-remote origin refs/heads/submission/david-grinberg` = API do GitHub (`660ed311…`, autor David Grinberg, 2026-10-26T19:59:34Z).
+- Escopo: `git diff --name-only upstream/main...HEAD | grep -v '^submissions/david-grinberg/'` → vazio; a branch está 2 commits à frente de `upstream/main`, 0 atrás.
+- Árvore remota: 44 arquivos em `submissions/`; nenhum `ravenstack_*.csv`, `.venv` ou `__pycache__`.
+- Fork: https://github.com/DavidGrinber/ai-master-challenge · branch: https://github.com/DavidGrinber/ai-master-challenge/tree/submission/david-grinberg
+- Linear: comentário de fechamento e status da DAV-178 aplicados depois deste commit (ver o comentário na issue).
+- Próxima issue recomendada: DAV-181.
