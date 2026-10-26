@@ -1,0 +1,4 @@
+evidence_id,session_id,linear_issue,description,path,status
+E-001,S-001,DAV-177,Regras oficiais no commit fixado,docs/references/SOURCE.md,consultado
+E-002,S-001,DAV-177,Roadmap e links de tarefas criadas,docs/roadmap-linear.json,criado e conferido
+E-003,S-001,DAV-177,Registro de preparação e kit,process-log/sessions/S-001-planejamento-chatgpt.md,preparado

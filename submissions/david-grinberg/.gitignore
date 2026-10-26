@@ -1,0 +1,12 @@
+# Dados e ambiente locais — manifest e instruções são versionados
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+.env
+.env.*
+!.env.example
+solution/data/raw/*
+!solution/data/raw/.gitkeep
+solution/data/processed/*
+!solution/data/processed/.gitkeep
+*.log

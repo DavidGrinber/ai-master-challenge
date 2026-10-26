@@ -1,0 +1,534 @@
+{
+  "exported_at": "2026-10-26T10:57:11-03:00",
+  "project": {
+    "id": "P-DAV-4",
+    "url": "https://linear.app/david-grinberg/project/g4-ravenstack-diagnostico-de-churn-e-cs-1a6781700e39",
+    "name": "G4 — RavenStack | Diagnóstico de churn e CS"
+  },
+  "milestones": [
+    {
+      "id": "207355c8-b8fd-4990-8fe2-e9ea5bb3de12",
+      "name": "M0 — Governança e setup",
+      "description": "25 min. Gate: regras, hipóteses pré-análise, fork/branch e trilha de evidências preparados.",
+      "progress": 0,
+      "sortOrder": 97
+    },
+    {
+      "id": "d80110f2-fc73-4111-8ece-ba9b2f655133",
+      "name": "M1 — Contrato de dados e temporalidade",
+      "description": "45 min. Gate: 5 tabelas auditadas; grãos e joins reconciliados; target, cortes temporais e features permitidas definidos.",
+      "progress": 0,
+      "sortOrder": 1144
+    },
+    {
+      "id": "3004fda5-42b4-4097-905e-40705073cd52",
+      "name": "M2 — Diagnóstico e hipóteses",
+      "description": "65 min. Gate: hipóteses examinadas com amostras, incerteza e evidências; narrativa macro e contas concretas reconciliadas.",
+      "progress": 0,
+      "sortOrder": 2126
+    },
+    {
+      "id": "dcd9f445-d839-441b-b84b-8da7d440abc2",
+      "name": "M3 — Modelo e acionamento",
+      "description": "85 min. Gate: modelo supera referências com validação temporal; score e limiar compatíveis com capacidade de CS.",
+      "progress": 0,
+      "sortOrder": 3062
+    },
+    {
+      "id": "338749f5-8f13-46f4-a2fd-5acc7ccd66e8",
+      "name": "M4 — Painel operacional de CS",
+      "description": "85 min. Gate: fila de contas, investigação, motivos, filtros e exportação funcionam sobre scores reais; limites claros.",
+      "progress": 0,
+      "sortOrder": 4126
+    },
+    {
+      "id": "8c292ab0-300c-498b-b803-3db63bccb7dd",
+      "name": "M5 — Validação e entrega",
+      "description": "55 min. Gate: relatório, impacto em cenários, reprodução, logs e submissão no formato exigido.",
+      "progress": 0,
+      "sortOrder": 5168
+    }
+  ],
+  "tasks": [
+    {
+      "index": 0,
+      "milestone": 0,
+      "title": "Consolidar regras, roadmap e central de evidências",
+      "dependencies": [],
+      "priority": 2,
+      "scope": "Publicar o plano inicial com as exigências do case, entregas, hipóteses, protocolo de logs e marcos. Escopo atual exclusivamente de organização.",
+      "acceptance": "Projeto próprio, 6 marcos, 24 issues com dependências e 3 documentos vinculados; estado inicial sem análise declarado. Fonte oficial fixada por commit.",
+      "evidence": "docs/01-central-do-case.md; docs/roadmap-linear.json; registro S-001 de planejamento com ChatGPT.",
+      "id": "DAV-177",
+      "url": "https://linear.app/david-grinberg/issue/DAV-177/00-consolidar-regras-roadmap-e-central-de-evidencias",
+      "createdAt": "2026-10-26T13:48:03.883Z",
+      "status": "Done",
+      "blocked_by": []
+    },
+    {
+      "index": 1,
+      "milestone": 0,
+      "title": "Preparar fork, branch, ambiente e estrutura da submissão",
+      "dependencies": [
+        0
+      ],
+      "priority": 2,
+      "scope": "Inspecionar Git e identidade do candidato; usar fork e branch submission/<slug-do-candidato>. Preparar estrutura dentro da pasta permitida. Executar apenas setup, sem CSVs.",
+      "acceptance": "Fork/remote/branch e slug verificados; nenhum arquivo alterado fora de submissions/<slug>/; ambiente mínimo e logs preparados; primeiro commit de setup.",
+      "evidence": "Saídas Git sem segredos, árvore de arquivos, versões do ambiente e commit; prompt real de setup.",
+      "id": "DAV-178",
+      "url": "https://linear.app/david-grinberg/issue/DAV-178/01-preparar-fork-branch-ambiente-e-estrutura-da-submissao",
+      "createdAt": "2026-10-26T13:48:10.426Z",
+      "status": "Todo",
+      "blocked_by": [
+        "DAV-177"
+      ]
+    },
+    {
+      "index": 2,
+      "milestone": 0,
+      "title": "Revisar e fixar hipóteses e decisões pré-análise",
+      "dependencies": [
+        0
+      ],
+      "priority": 2,
+      "scope": "Revisar H01–H09 e separar hipóteses do usuário das ampliações propostas. Definir o problema de decisão do CS e registrar limites e dúvidas antes de adquirir dados.",
+      "acceptance": "Candidato registra aceite/alterações; versão inicial com data e commit; H01–H09 não testadas; novas hipóteses usarão H10+ e marca exploratória. Capacidade CS e horizonte permanecem hipóteses se desconhecidos.",
+      "evidence": "docs/02-hipoteses.md; decision-log; commit de pré-registro; tempo real.",
+      "id": "DAV-179",
+      "url": "https://linear.app/david-grinberg/issue/DAV-179/02-revisar-e-fixar-hipoteses-e-decisoes-pre-analise",
+      "createdAt": "2026-10-26T13:48:16.751Z",
+      "status": "Todo",
+      "blocked_by": [
+        "DAV-177"
+      ]
+    },
+    {
+      "index": 3,
+      "milestone": 1,
+      "title": "Adquirir as 5 tabelas e documentar origem e schemas",
+      "dependencies": [
+        1,
+        2
+      ],
+      "priority": 2,
+      "scope": "Obter os CSVs da fonte indicada pelo challenge. Verificar licença, descrição, natureza dos dados, versão e checksums. Inventariar campos, tipos, grão, datas e cobertura sem produzir conclusões de churn.",
+      "acceptance": "Cinco arquivos identificados; contagens reais e schemas; manifest com origem/data/hash; datas e chaves disponíveis; ausências de campos explícitas. Natureza sintética somente se comprovada na fonte.",
+      "evidence": "dataset-manifest.json; data-dictionary.md; saída de inventário; evidência da licença/procedência.",
+      "id": "DAV-180",
+      "url": "https://linear.app/david-grinberg/issue/DAV-180/03-adquirir-as-5-tabelas-e-documentar-origem-e-schemas",
+      "createdAt": "2026-10-26T13:48:24.120Z",
+      "status": "Backlog",
+      "blocked_by": [
+        "DAV-178",
+        "DAV-179"
+      ]
+    },
+    {
+      "index": 4,
+      "milestone": 1,
+      "title": "Auditar cardinalidade, qualidade e reconciliação dos joins",
+      "dependencies": [
+        3
+      ],
+      "priority": 2,
+      "scope": "Mapear account_id e subscription_id; verificar duplicações, órfãos, múltiplas assinaturas e eventos, datas e inconsistências. Agregar tabelas de eventos ao grão correto antes dos cruzamentos.",
+      "acceptance": "Mapa dos joins e cardinalidades; totais de contas, eventos e MRR reconciliados antes/depois; joins não multiplicam uso/tickets/receita; políticas para ausências e eventos repetidos documentadas.",
+      "evidence": "data-contract.md; relatório de qualidade; consultas/scripts; amostras por conta e contagens reconciliadas.",
+      "id": "DAV-181",
+      "url": "https://linear.app/david-grinberg/issue/DAV-181/04-auditar-cardinalidade-qualidade-e-reconciliacao-dos-joins",
+      "createdAt": "2026-10-26T13:48:32.121Z",
+      "status": "Backlog",
+      "blocked_by": [
+        "DAV-180"
+      ]
+    },
+    {
+      "index": 5,
+      "milestone": 1,
+      "title": "Fixar alvo, elegibilidade, horizonte e validação temporal",
+      "dependencies": [
+        3,
+        4
+      ],
+      "priority": 2,
+      "scope": "Verificar churn_flag versus churn_events e assinaturas; definir churn de conta/assinatura, reativação e censura. Decidir unidade conta×corte e horizonte candidato 30 dias, conforme viabilidade.",
+      "acceptance": "Target e população formalizados; corte t, observação, janela futura e acompanhamento; lista de campos permitidos/proibidos; split temporal e fronteiras sem sobreposição de labels indevida. Gate de viabilidade registrado antes de modelar.",
+      "evidence": "data-contract.md com linha do tempo, decisão DEC e auditoria de vazamento; se inviável, limitação e revisão explícita de escopo.",
+      "id": "DAV-182",
+      "url": "https://linear.app/david-grinberg/issue/DAV-182/05-fixar-alvo-elegibilidade-horizonte-e-validacao-temporal",
+      "createdAt": "2026-10-26T13:48:38.212Z",
+      "status": "Backlog",
+      "blocked_by": [
+        "DAV-180",
+        "DAV-181"
+      ]
+    },
+    {
+      "index": 6,
+      "milestone": 1,
+      "title": "Construir snapshots e features disponíveis no instante de decisão",
+      "dependencies": [
+        4,
+        5
+      ],
+      "priority": 2,
+      "scope": "Produzir dataset analítico account×cutoff agregando uso via assinatura, suporte e perfil conhecido à época; criar labels futuros apenas para avaliação. Manter camada retrospectiva de motivos separada.",
+      "acceptance": "Five-table lineage documentada; snapshots com datas máximas das fontes; pós-churn/futuro excluídos das features; base zero, ausência de uso e pouco histórico tratados; testes de invariantes e amostras por conta.",
+      "evidence": "Pipeline, dicionário de features, dataset versionado por hash, auditoria point-in-time e reconciliação.",
+      "id": "DAV-183",
+      "url": "https://linear.app/david-grinberg/issue/DAV-183/06-construir-snapshots-e-features-disponiveis-no-instante-de-decisao",
+      "createdAt": "2026-10-26T13:48:46.566Z",
+      "status": "Backlog",
+      "blocked_by": [
+        "DAV-181",
+        "DAV-182"
+      ]
+    },
+    {
+      "index": 7,
+      "milestone": 2,
+      "title": "Reconciliar churn, receita, uso e satisfação por coorte",
+      "dependencies": [
+        6
+      ],
+      "priority": 3,
+      "scope": "Investigar a aparente contradição do brief. Separar logo churn, churn de assinatura e churn de receita; uso agregado versus por conta/coorte; satisfação com cobertura de resposta.",
+      "acceptance": "Definições e denominadores claros; tendências por período/coorte; concentração de uso e MRR; CSAT não representa clientes sem resposta; qualquer achado tem fonte e n.",
+      "evidence": "Notebook/script e tabelas; pelo menos um quadro que confronte narrativa do CEO com evidências sem presumir conclusão.",
+      "id": "DAV-184",
+      "url": "https://linear.app/david-grinberg/issue/DAV-184/07-reconciliar-churn-receita-uso-e-satisfacao-por-coorte",
+      "createdAt": "2026-10-26T13:48:52.789Z",
+      "status": "Backlog",
+      "blocked_by": [
+        "DAV-183"
+      ]
+    },
+    {
+      "index": 8,
+      "milestone": 2,
+      "title": "Testar H01: queda de uso, antecedência e falsos alertas",
+      "dependencies": [
+        6
+      ],
+      "priority": 2,
+      "scope": "Comparar uso anterior de futuros churners e retidos elegíveis. Explorar janelas 7/14/30 dias e quedas relativa/absoluta ajustadas à exposição; nenhuma faixa predefinida como resultado.",
+      "acceptance": "Curvas/faixas de queda e antecedência, n e incerteza; base zero e novos clientes separados; limiares candidatos avaliados em desenvolvimento; alertas avaliados fora da amostra para evitar escolha no teste final.",
+      "evidence": "EXP de H01 com curvas/tabelas, falsos alertas, antecedência e referência de código/dados; status apoiada/refutada/inconclusiva.",
+      "id": "DAV-185",
+      "url": "https://linear.app/david-grinberg/issue/DAV-185/08-testar-h01-queda-de-uso-antecedencia-e-falsos-alertas",
+      "createdAt": "2026-10-26T13:48:59.543Z",
+      "status": "Backlog",
+      "blocked_by": [
+        "DAV-183"
+      ]
+    },
+    {
+      "index": 9,
+      "milestone": 2,
+      "title": "Testar H02–H03: suporte, fricção técnica e churn posterior",
+      "dependencies": [
+        6
+      ],
+      "priority": 2,
+      "scope": "Relacionar tickets prévios, escaladas, resposta/resolução e satisfação com erros/uso e churn posterior. Normalizar exposição; não usar resolução/satisfação ainda desconhecida no corte.",
+      "acceptance": "Taxas com denominadores; separar sem tickets, sem resposta e n pequeno; comparar perfis/tenure semelhantes; discutir causalidade reversa, seleção e informações posteriores.",
+      "evidence": "EXP H02/H03, tabela de efeito/incerteza, cruzamento das fontes e interpretação limitada à evidência.",
+      "id": "DAV-186",
+      "url": "https://linear.app/david-grinberg/issue/DAV-186/09-testar-h02-h03-suporte-friccao-tecnica-e-churn-posterior",
+      "createdAt": "2026-10-26T13:49:05.964Z",
+      "status": "Backlog",
+      "blocked_by": [
+        "DAV-183"
+      ]
+    },
+    {
+      "index": 10,
+      "milestone": 2,
+      "title": "Testar H04: perfis, adoção e proxies de valor",
+      "dependencies": [
+        6
+      ],
+      "priority": 3,
+      "scope": "Comparar indústria, plano, canal, trial, tenure e porte quando existir; distinguir valor percebido de proxies de realização de valor. Combinar adoção, retenção e receita.",
+      "acceptance": "Segmentos com tamanho, denominador, período, retenção e exposição de MRR; distinguir novos/maduros; contas exemplares; hipóteses não sustentadas explicitadas.",
+      "evidence": "EXP H04; segmentação reproduzível; tabela com proxies e limites; referências de contas sem expor dados pessoais.",
+      "id": "DAV-187",
+      "url": "https://linear.app/david-grinberg/issue/DAV-187/10-testar-h04-perfis-adocao-e-proxies-de-valor",
+      "createdAt": "2026-10-26T13:49:12.068Z",
+      "status": "Backlog",
+      "blocked_by": [
+        "DAV-183"
+      ]
+    },
+    {
+      "index": 11,
+      "milestone": 2,
+      "title": "Examinar alternativas e sintetizar explicações sustentadas",
+      "dependencies": [
+        7,
+        8,
+        9,
+        10
+      ],
+      "priority": 3,
+      "scope": "Triar H05–H09: composição, renovação, ativação, reativação e motivos declarados. Aprofundar apenas as mais informativas e registrar hipóteses emergentes H10+.",
+      "acceptance": "Matriz completa com evidência e status inclusive não testável/não examinada; mecanismos plausíveis separados de causa comprovada; priorização por evidência, magnitude e utilidade. Motivos pós-evento nunca viram features futuras.",
+      "evidence": "Matriz de findings; evidências por pergunta; limites e decisão sobre o que aprofundar no orçamento.",
+      "id": "DAV-188",
+      "url": "https://linear.app/david-grinberg/issue/DAV-188/11-examinar-alternativas-e-sintetizar-explicacoes-sustentadas",
+      "createdAt": "2026-10-26T13:49:20.453Z",
+      "status": "Backlog",
+      "blocked_by": [
+        "DAV-184",
+        "DAV-185",
+        "DAV-186",
+        "DAV-187"
+      ]
+    },
+    {
+      "index": 12,
+      "milestone": 3,
+      "title": "Criar referências e primeiro modelo interpretável",
+      "dependencies": [
+        6
+      ],
+      "priority": 2,
+      "scope": "Começar com prevalência, política simples de queda de uso e regressão logística. Fixar preprocessing no treino e comparar por ranking e utilidade no mesmo recorte.",
+      "acceptance": "Experimentos versionados com seed e split fixos; sem account_id/labels/futuro como preditores; baseline e modelo avaliados com PR-AUC, precision@K e recall@K; sem alegar desempenho antes de medir.",
+      "evidence": "EXP do baseline e regressão; artefato do pipeline; tabela de métricas e auditoria de vazamento.",
+      "id": "DAV-189",
+      "url": "https://linear.app/david-grinberg/issue/DAV-189/12-criar-referencias-e-primeiro-modelo-interpretavel",
+      "createdAt": "2026-10-26T13:49:27.913Z",
+      "status": "Backlog",
+      "blocked_by": [
+        "DAV-183"
+      ]
+    },
+    {
+      "index": 13,
+      "milestone": 3,
+      "title": "Comparar challenger e validar generalização sem vazamento",
+      "dependencies": [
+        12
+      ],
+      "priority": 2,
+      "scope": "Comparar no máximo um modelo tabular adicional, se o tempo permitir. Ajustar em treino/validação e avaliar uma vez no teste temporal reservado. Justificar seleção, inclusive manter baseline.",
+      "acceptance": "Fronteiras temporais auditadas; labels sobrepostos tratados; dependência por conta considerada; PR-AUC versus prevalência, lift, precision@K/recall@K, MRR coberto e estabilidade por segmento; limites por n.",
+      "evidence": "EXP comparativo, teste final reservado, relatório de leakage/ablação e decisão do modelo vencedor.",
+      "id": "DAV-190",
+      "url": "https://linear.app/david-grinberg/issue/DAV-190/13-comparar-challenger-e-validar-generalizacao-sem-vazamento",
+      "createdAt": "2026-10-26T13:49:34.029Z",
+      "status": "Backlog",
+      "blocked_by": [
+        "DAV-189"
+      ]
+    },
+    {
+      "index": 14,
+      "milestone": 3,
+      "title": "Definir calibração, limiar e política de acionamento do CS",
+      "dependencies": [
+        8,
+        11,
+        13
+      ],
+      "priority": 2,
+      "scope": "Avaliar calibração e Brier se exibir probabilidades. Escolher limiar/top-K na validação conforme capacidade de CS e custo de falsos alertas; capacidade desconhecida deve aparecer como cenário ajustável.",
+      "acceptance": "Limiares explicados sem otimizar no teste; efeito de capacidade demonstrado; risco e valor financeiro separados; sinal de queda não tratado como garantia; score relativo rotulado se probabilidade não for confiável.",
+      "evidence": "Curva de calibração quando aplicável; tabela de políticas; regra operacional, data de referência, horizonte e limitações.",
+      "id": "DAV-191",
+      "url": "https://linear.app/david-grinberg/issue/DAV-191/14-definir-calibracao-limiar-e-politica-de-acionamento-do-cs",
+      "createdAt": "2026-10-26T13:49:41.806Z",
+      "status": "Backlog",
+      "blocked_by": [
+        "DAV-185",
+        "DAV-188",
+        "DAV-190"
+      ]
+    },
+    {
+      "index": 15,
+      "milestone": 3,
+      "title": "Empacotar inferência, scores e model card",
+      "dependencies": [
+        13,
+        14
+      ],
+      "priority": 2,
+      "scope": "Salvar pipeline e criar comando de inferência para novos snapshots elegíveis, com versão de features/modelo. Produzir motivos compreensíveis de risco sem alegar causalidade.",
+      "acceptance": "Reprodução das previsões; contrato de entrada/saída; score gerado só por modelo salvo; account_id, data de corte, horizonte, versão e sinais; exemplos verificados; model card com métricas e população.",
+      "evidence": "Comando real de treino/inferência, artefatos pequenos, scored_accounts e model-card.md; verificação de previsões repetidas.",
+      "id": "DAV-192",
+      "url": "https://linear.app/david-grinberg/issue/DAV-192/15-empacotar-inferencia-scores-e-model-card",
+      "createdAt": "2026-10-26T13:49:47.850Z",
+      "status": "Backlog",
+      "blocked_by": [
+        "DAV-190",
+        "DAV-191"
+      ]
+    },
+    {
+      "index": 16,
+      "milestone": 4,
+      "title": "Definir fluxo e contrato do painel para uso por CS",
+      "dependencies": [
+        5
+      ],
+      "priority": 3,
+      "scope": "Especificar a decisão operacional antes do layout: carteira → prioridade → conta → evidência → ação humana. Stack sugerida Streamlit; contrato desacoplado do treino e alinhado ao snapshot.",
+      "acceptance": "Aceite de fila, filtros, risco/score, MRR, ficha, sinais e exportação; datas/versões visíveis; estados sem histórico/sem dados; nenhuma promessa de CRM ou envio automático.",
+      "evidence": "Especificação curta e contrato de dados; sketch opcional; vínculo às decisões e ao aceite do MVP.",
+      "id": "DAV-193",
+      "url": "https://linear.app/david-grinberg/issue/DAV-193/16-definir-fluxo-e-contrato-do-painel-para-uso-por-cs",
+      "createdAt": "2026-10-26T13:49:53.931Z",
+      "status": "Backlog",
+      "blocked_by": [
+        "DAV-182"
+      ]
+    },
+    {
+      "index": 17,
+      "milestone": 4,
+      "title": "Implementar fila priorizada e investigação de contas",
+      "dependencies": [
+        15,
+        16
+      ],
+      "priority": 2,
+      "scope": "Construir MVP com scores reais: lista de elegíveis, filtros por segmento/plano, seleção de conta, histórico disponível e sinais anteriores ao corte. Exibir risco e MRR como dimensões distintas.",
+      "acceptance": "Score consistente com inferência; conta cancelada/ineligível não entra na fila ativa; filtros corretos; datas/horizonte/modelo visíveis; ficha permite entender por que investigar sem confundir explicação com causa.",
+      "evidence": "Código do app; execução local; capturas reais; conta conferida entre saída offline e painel.",
+      "id": "DAV-194",
+      "url": "https://linear.app/david-grinberg/issue/DAV-194/17-implementar-fila-priorizada-e-investigacao-de-contas",
+      "createdAt": "2026-10-26T13:49:59.969Z",
+      "status": "Backlog",
+      "blocked_by": [
+        "DAV-192",
+        "DAV-193"
+      ]
+    },
+    {
+      "index": 18,
+      "milestone": 4,
+      "title": "Adicionar visão diagnóstica, playbooks e exportação",
+      "dependencies": [
+        11,
+        14,
+        17
+      ],
+      "priority": 3,
+      "scope": "Incluir visão macro para relacionar os findings ao trabalho diário, recomendações por sinal e exportação CSV da carteira filtrada. Persistência de status apenas se implementada e testada.",
+      "acceptance": "Taxas/denominadores visíveis; CSV corresponde à seleção; recomendações rastreáveis; score sem percentual se não calibrado; rótulo claro de MVP; funcionalidades não implementadas não simuladas.",
+      "evidence": "Capturas reais, amostra do export e tabela de correspondência sinal→ação→evidência.",
+      "id": "DAV-195",
+      "url": "https://linear.app/david-grinberg/issue/DAV-195/18-adicionar-visao-diagnostica-playbooks-e-exportacao",
+      "createdAt": "2026-10-26T13:50:06.829Z",
+      "status": "Backlog",
+      "blocked_by": [
+        "DAV-188",
+        "DAV-191",
+        "DAV-194"
+      ]
+    },
+    {
+      "index": 19,
+      "milestone": 4,
+      "title": "Validar painel com cenários operacionais e dados extremos",
+      "dependencies": [
+        18
+      ],
+      "priority": 2,
+      "scope": "Verificar conta sem uso, sem ticket, com múltiplas assinaturas, pouco histórico, inexistente e carteira filtrada vazia quando existirem ou via fixtures claramente técnicas. Conferir elegibilidade e inferência.",
+      "acceptance": "Painel inicia conforme setup; filtros e export batem com fonte; sem mostrar futuro/label como feature; sem crash em estados vazios; fixture nunca entra como achado do case; rastreabilidade e limites visíveis.",
+      "evidence": "Checklist de aceite, comandos e saídas, confronto offline×UI e evidências de correções realmente ocorridas.",
+      "id": "DAV-196",
+      "url": "https://linear.app/david-grinberg/issue/DAV-196/19-validar-painel-com-cenarios-operacionais-e-dados-extremos",
+      "createdAt": "2026-10-26T13:50:14.041Z",
+      "status": "Backlog",
+      "blocked_by": [
+        "DAV-195"
+      ]
+    },
+    {
+      "index": 20,
+      "milestone": 5,
+      "title": "Priorizar ações e estimar impacto em cenários explícitos",
+      "dependencies": [
+        11,
+        14
+      ],
+      "priority": 2,
+      "scope": "Transformar findings em até 3 ações prioritárias com gatilho, responsável sugerido, prazo, métrica e desenho de validação. Estimar retenção incremental em cenários; não confundir MRR em risco com MRR recuperável.",
+      "acceptance": "Cada ação tem evidência e tradeoff; MRR em risco separado de impacto incremental; cenários usam capacidade, elegibilidade e efeito assumido; premissas/sensibilidade visíveis; proposta de piloto controlado.",
+      "evidence": "Playbook e memória de cálculo reproduzível com unidades/período, cenários e limitações.",
+      "id": "DAV-197",
+      "url": "https://linear.app/david-grinberg/issue/DAV-197/20-priorizar-acoes-e-estimar-impacto-em-cenarios-explicitos",
+      "createdAt": "2026-10-26T13:50:20.615Z",
+      "status": "Backlog",
+      "blocked_by": [
+        "DAV-188",
+        "DAV-191"
+      ]
+    },
+    {
+      "index": 21,
+      "milestone": 5,
+      "title": "Redigir diagnóstico executivo e responder às 3 perguntas",
+      "dependencies": [
+        19,
+        20
+      ],
+      "priority": 2,
+      "scope": "Produzir relatório curto com resumo executivo, principais evidências, segmentos/contas específicas, ações/impacto, limitações e acesso ao painel. Usar o template oficial no README da submissão.",
+      "acceptance": "As 3 perguntas respondidas; cinco tabelas contribuem; números reproduzíveis; linguagem para CEO; correlação/causalidade distintas; links de figuras, código e evidências; sem afirmar insights não medidos.",
+      "evidence": "README conforme template; relatório Markdown; findings→evidência→ação; screenshots reais do produto.",
+      "id": "DAV-198",
+      "url": "https://linear.app/david-grinberg/issue/DAV-198/21-redigir-diagnostico-executivo-e-responder-as-3-perguntas",
+      "createdAt": "2026-10-26T13:50:26.804Z",
+      "status": "Backlog",
+      "blocked_by": [
+        "DAV-196",
+        "DAV-197"
+      ]
+    },
+    {
+      "index": 22,
+      "milestone": 5,
+      "title": "Reproduzir entrega e auditar process-log e escopo do PR",
+      "dependencies": [
+        21
+      ],
+      "priority": 2,
+      "scope": "Executar setup, pipeline e app em ambiente limpo; conferir versão dos dados, outputs, dependências e métricas. Exportar roteiro/decisões do Linear para a entrega e revisar logs reais desde ChatGPT.",
+      "acceptance": "Comandos reproduzíveis; nenhuma dependência de links privados para avaliar; process-log mostra prompts, verificação, decisões e iterações reais; tempo real; ausência de segredos; git diff restrito à pasta; licença e dados pesados tratados.",
+      "evidence": "Checklist e saída da reprodução; evidence-index completo; roadmap-linear export; commits e diff conferidos.",
+      "id": "DAV-199",
+      "url": "https://linear.app/david-grinberg/issue/DAV-199/22-reproduzir-entrega-e-auditar-process-log-e-escopo-do-pr",
+      "createdAt": "2026-10-26T13:50:33.508Z",
+      "status": "Backlog",
+      "blocked_by": [
+        "DAV-198"
+      ]
+    },
+    {
+      "index": 23,
+      "milestone": 5,
+      "title": "Preparar e abrir PR no formato oficial",
+      "dependencies": [
+        22
+      ],
+      "priority": 2,
+      "scope": "Confirmar nome/LinkedIn/slug reais; push da branch do fork e um único PR para main com título [Submission] Nome — Challenge 001. Essa tarefa fica pendente até a implementação e revisão final.",
+      "acceptance": "Somente submissions/<slug>/ no diff; README e process-log acessíveis; código/setup e relatório presentes; links funcionais; PR único no formato exigido. Não afirmar submissão antes de URL real.",
+      "evidence": "URL real do PR; SHA da entrega; checklist final; data de envio e pendências explícitas.",
+      "id": "DAV-200",
+      "url": "https://linear.app/david-grinberg/issue/DAV-200/23-preparar-e-abrir-pr-no-formato-oficial",
+      "createdAt": "2026-10-26T13:50:41.409Z",
+      "status": "Backlog",
+      "blocked_by": [
+        "DAV-199"
+      ]
+    }
+  ]
+}
