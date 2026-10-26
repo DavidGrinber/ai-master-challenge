@@ -9,6 +9,7 @@
     "version_created_utc": "2025-07-21T23:53:44.247Z",
     "version_notes": "Initial release",
     "license": "MIT",
+    "credit": "River @ Rivalytics (exigência de crédito no README da fonte)",
     "nature": "Simulado. Descrição da fonte: 'This simulated dataset was created using Python and ChatGPT'. RavenStack é uma empresa fictícia.",
     "archive_bytes": 600149,
     "archive_sha256": "ce6afd8d1fe1e129a40ec8efc1756ae8933ed9f05d62a7945c28873e5baa15c0",

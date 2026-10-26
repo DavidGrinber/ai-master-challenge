@@ -1,3 +1,4 @@
 session_id,linear_issue,started_at,ended_at,duration_minutes,note
 S-001,DAV-177,,,,Tempo total não aferido; não reconstruir horários retroativamente.
 S-002,DAV-178,,,,"Não cronometrado. Timestamps observados (-03:00): clone 16:28; commit 930e594 16:50:35; download 16:50; fetch 16:54."
+S-003,DAV-181; DAV-201,2026-10-26T17:07:46-03:00,,,"Início = DAV-181 em andamento. Fim não cronometrado; ver horário do commit."

@@ -19,16 +19,18 @@ solution/
   data/manifest.json   origem, versão, licença, tamanho e SHA-256 dos originais (versionado)
   data/raw/            5 CSVs originais + README da fonte (local, somente leitura, não versionado)
   data/processed/      bases derivadas geradas por script (local, não versionado)
+    clean/             5 tabelas limpas e tipadas com flags q_* (DAV-201); ler com clean_data.load_clean()
   src/                 preparação, análise, treino e inferência (scripts Python)
   tests/               testes do comportamento que precisa ser verificado
   app/                 painel Streamlit (DAV-194)
   models/              pipeline treinado + versão (DAV-189)
   outputs/             scores, tabelas e figuras usadas no relatório
+    data_quality/      checks.csv + derived_manifest.json (schema e SHA-256 da base limpa)
 process-log/           registros por sessão, experimentos, evidências e tempo
 scripts/stage.sh       git add seguro para esta pasta
 ```
 
-Fluxo: `raw/` → `src/` prepara a base por conta e data de corte → `processed/` → `src/` treina e avalia → `models/` → `src/` gera scores → `outputs/` (account_id, data de referência, horizonte, versão do modelo, sinais) → `app/` lê `processed/` e `outputs/`. O painel não treina modelo.
+Fluxo: `raw/` → `clean_data.py` → `processed/clean/` → `src/` prepara a base por conta e data de corte → `processed/` → `src/` treina e avalia → `models/` → `src/` gera scores → `outputs/` (account_id, data de referência, horizonte, versão do modelo, sinais) → `app/` lê `processed/` e `outputs/`. O painel não treina modelo.
 
 ## Dados
 
@@ -42,6 +44,8 @@ Fluxo: `raw/` → `src/` prepara a base por conta e data de corte → `processed
   - Split temporal; preprocessing ajustado só no treino; limiar escolhido na validação, nunca no teste.
   - "Probabilidade" só com calibração validada; caso contrário, exibir score/ranking.
   - Correlação, importância de variável e motivo declarado não provam causa. Risco previsto não mede efeito de intervenção.
+- Ler sempre a base limpa (`clean_data.load_clean`), nunca reimplementar o parsing dos originais. Colunas `q_*` são flags de qualidade: não apagar as linhas marcadas sem decisão registrada. Excluir `q_is_duplicate` de qualquer soma de receita.
+- Limitações conhecidas (detalhe em `docs/data-treatment-log.md`): datas de uso e tickets fora do ciclo da conta; `churn_flag` e `is_reactivation` contraditórios; assinaturas sobrepostas (MRR da conta ambíguo); `reason_code` incoerente com `feedback_text`; satisfação só com notas 3–5. Citar essas limitações em qualquer conclusão que dependa delas.
 - pandas 3.x: `str` é o dtype padrão para texto e copy-on-write está sempre ativo. Parsear datas explicitamente.
 
 ## Ambiente e comandos
@@ -56,6 +60,7 @@ Verificados na sessão S-002 (saídas em `process-log/sessions/S-002-claude-code
 | `python3.12 -m venv .venv && .venv/bin/python -m pip install -r requirements.txt` | alternativa sem uv (resolução conferida com `pip install --dry-run`) |
 | `.venv/bin/python solution/src/raw_data.py fetch` | baixa o pacote público do Kaggle, valida no temporário e grava em `raw/` sem sobrescrever |
 | `.venv/bin/python solution/src/raw_data.py verify` | confere presença, tamanho e SHA-256 contra o manifest; exit 1 se divergir |
+| `.venv/bin/python solution/src/clean_data.py` | gera `processed/clean/`, `outputs/data_quality/` e `docs/data-quality-report.md`; recusa rodar se os originais divergirem (S-003) |
 | `.venv/bin/python -m pytest` | testes de `solution/tests/` |
 | `sh scripts/stage.sh` | prepara o commit e falha se algo fora da pasta estiver preparado |
 | `uv pip compile requirements.in --universal --python-version 3.12 --exclude-newer <AAAA-MM-DD> -o requirements.txt` | recompila o lock, apenas com versões publicadas até a data |
@@ -64,7 +69,7 @@ Planejados (ainda não existem; cada issue define nome e interface e move a linh
 
 | Issue | Comando previsto |
 |---|---|
-| DAV-181 | script em `solution/src/` que gera a base analítica em `processed/` |
+| DAV-181 | script em `solution/src/` que gera, a partir de `processed/clean/`, a base analítica em `processed/` |
 | DAV-189 | scripts de treino/avaliação e de geração de scores em `outputs/` |
 | DAV-194 | `.venv/bin/streamlit run solution/app/<arquivo>.py` |
 
@@ -84,6 +89,7 @@ Não documentar como verificado um comando que não foi executado com saída obs
 | Etapa | Issue | Entrega |
 |---|---|---|
 | 1 | DAV-178 | harness, fork/branch, hipóteses revisadas, CSVs com manifest |
+| 1b | DAV-201 | base derivada limpa (sem apagar linhas), relatório de qualidade e registro de tratamento; inconsistências como limitações |
 | 2 | DAV-181 | prepara e cruza as cinco tabelas sem duplicar números; define churn, população elegível e datas que separam passado de futuro; base reproduzível em `processed/` e contrato em `docs/data-contract.md` |
 | 3 | DAV-184 | investiga o churn e testa H01–H09 (e H10+ datadas): apoiada, refutada, inconclusiva ou não testável, com n, denominador, período, magnitude e incerteza |
 | 4 | DAV-189 | define o alvo temporal e o horizonte; compara baseline simples com modelo interpretável usando só informação anterior à previsão; split temporal e auditoria de vazamento; salva o pipeline em `models/` e gera scores reproduzíveis (account_id, corte, versão, sinais); model card |

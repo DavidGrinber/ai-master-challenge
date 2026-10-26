@@ -1,0 +1,116 @@
+{
+  "generated_by": "solution/src/clean_data.py",
+  "pandas": "3.0.6",
+  "data_end": "2024-12-31",
+  "tables": {
+    "accounts": {
+      "rows": 500,
+      "raw_rows": 500,
+      "sha256": "13be6f19267e328669d0abfd033444dbd839ea19cf5e24753f473a9b11e076b3",
+      "columns": {
+        "account_id": "str",
+        "account_name": "str",
+        "industry": "str",
+        "country": "str",
+        "signup_date": "datetime",
+        "referral_source": "str",
+        "plan_tier": "str",
+        "seats": "int64",
+        "is_trial": "bool",
+        "churn_flag": "bool",
+        "has_churn_event": "bool",
+        "q_churn_flag_conflict": "bool"
+      }
+    },
+    "subscriptions": {
+      "rows": 5000,
+      "raw_rows": 5000,
+      "sha256": "c06f1162220a2edc2fc0cf7d12b3400b0968c58b802ed7832e22e1f54e6783a3",
+      "columns": {
+        "subscription_id": "str",
+        "account_id": "str",
+        "start_date": "datetime",
+        "end_date": "datetime",
+        "plan_tier": "str",
+        "seats": "int64",
+        "mrr_amount": "int64",
+        "arr_amount": "int64",
+        "is_trial": "bool",
+        "upgrade_flag": "bool",
+        "downgrade_flag": "bool",
+        "churn_flag": "bool",
+        "billing_frequency": "str",
+        "auto_renew_flag": "bool",
+        "q_duplicate_of": "str",
+        "q_is_duplicate": "bool",
+        "q_upgrade_and_downgrade": "bool",
+        "active_at_data_end": "bool",
+        "q_overlaps_other_subscription": "bool"
+      }
+    },
+    "feature_usage": {
+      "rows": 25000,
+      "raw_rows": 25000,
+      "sha256": "54526a120d1af1c0ef2f642e70866c7adec4ec99c4368b7b391b9df65815d5be",
+      "columns": {
+        "usage_row_id": "str",
+        "usage_id": "str",
+        "subscription_id": "str",
+        "usage_date": "datetime",
+        "feature_name": "str",
+        "usage_count": "int64",
+        "usage_duration_secs": "int64",
+        "error_count": "int64",
+        "is_beta_feature": "bool",
+        "q_usage_id_reused": "bool",
+        "q_same_subscription_day_feature": "bool",
+        "account_id": "str",
+        "q_before_account_signup": "bool",
+        "q_before_subscription_start": "bool",
+        "q_after_subscription_end": "bool",
+        "q_on_duplicate_subscription": "bool"
+      }
+    },
+    "support_tickets": {
+      "rows": 2000,
+      "raw_rows": 2000,
+      "sha256": "50e8f6d28fdf08eb8142bcb1b76df57b2e353b6fa9f52d9d201f7f1ccfac0bd9",
+      "columns": {
+        "ticket_id": "str",
+        "account_id": "str",
+        "submitted_at": "datetime",
+        "closed_at": "datetime",
+        "resolution_time_hours": "float64",
+        "priority": "str",
+        "first_response_time_minutes": "int64",
+        "satisfaction_score": "Int64",
+        "escalation_flag": "bool",
+        "has_satisfaction": "bool",
+        "q_before_account_signup": "bool"
+      }
+    },
+    "churn_events": {
+      "rows": 600,
+      "raw_rows": 600,
+      "sha256": "318be49c44239b1c9b6991bf522ec526a13674f5863881eef190ddf92ca54a8a",
+      "columns": {
+        "churn_event_id": "str",
+        "account_id": "str",
+        "churn_date": "datetime",
+        "reason_code": "str",
+        "refund_amount_usd": "float64",
+        "preceding_upgrade_flag": "bool",
+        "preceding_downgrade_flag": "bool",
+        "is_reactivation": "bool",
+        "feedback_text": "str",
+        "event_seq": "int64",
+        "n_events_account": "int64",
+        "q_same_day_event": "bool",
+        "q_reactivation_on_first_event": "bool",
+        "q_not_reactivation_on_later_event": "bool",
+        "q_feedback_matches_reason": "boolean",
+        "q_days_to_nearest_subscription_end": "Int64"
+      }
+    }
+  }
+}

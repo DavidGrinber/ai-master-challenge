@@ -36,9 +36,18 @@ _Pendente (DAV-198)._
 
 - Os dados são simulados: a fonte declara que foram gerados com Python e ChatGPT ([manifest](solution/data/manifest.json)). Conclusões valem para este dataset, não para uma operação real.
 - O candidato abriu os CSVs e usou IA sobre os dados antes deste fluxo; as hipóteses não são um registro cego ([DEC-008](docs/decision-log.md)).
+- Qualidade dos dados ([relatório](docs/data-quality-report.md), [tratamento](docs/data-treatment-log.md)):
+  - Metade do uso e dos tickets está datada antes do cadastro da conta.
+  - O `churn_flag` das contas contradiz os eventos de churn em 312 de 500 contas.
+  - Todas as contas seguem com assinatura ativa, mesmo depois de um churn.
+  - O motivo declarado e o feedback concordam em só 101 de 379 casos.
+  - A satisfação só tem notas de 3 a 5.
+  - Nada foi apagado: cada problema está marcado por linha.
 - _Demais limitações: pendentes._
 
 ### Como reproduzir
+
+Dados: [SaaS Subscription & Churn Analytics Dataset](https://www.kaggle.com/datasets/rivalytics/saas-subscription-and-churn-analytics-dataset), de River @ Rivalytics (Kaggle, versão 1, licença MIT; a fonte pede crédito ao autor).
 
 Requer Python 3.12. Comandos a partir de `submissions/david-grinberg/`:
 
@@ -47,12 +56,13 @@ python3.12 -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt   # ou: uv venv .venv --python 3.12 && uv pip install --python .venv/bin/python -r requirements.txt
 .venv/bin/python solution/src/raw_data.py fetch      # baixa o pacote público do Kaggle (sem login) para solution/data/raw/
 .venv/bin/python solution/src/raw_data.py verify     # confere tamanho e SHA-256 dos 6 arquivos contra o manifest
+.venv/bin/python solution/src/clean_data.py          # base derivada limpa + relatório de qualidade
 .venv/bin/python -m pytest                           # testes
 ```
 
 Se o download automático falhar, baixe o zip na [página do dataset](https://www.kaggle.com/datasets/rivalytics/saas-subscription-and-churn-analytics-dataset) e rode `.venv/bin/python solution/src/raw_data.py fetch --archive caminho/do/arquivo.zip`.
 
-_Preparação da base, treino, geração de scores e painel: pendentes (DAV-181, DAV-189, DAV-194)._
+_Base analítica, treino, geração de scores e painel: pendentes (DAV-181, DAV-189, DAV-194)._
 
 ---
 

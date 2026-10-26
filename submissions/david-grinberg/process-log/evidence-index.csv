@@ -10,3 +10,8 @@ E-008,S-002,DAV-178,Conferência dos originais (raw_data.py verify),process-log/
 E-009,S-002,DAV-178,Testes do harness,solution/tests/test_raw_data.py,7 passed
 E-010,S-002,DAV-178,Revisão das hipóteses e exploração anterior declarada,docs/02-hipoteses.md; docs/decision-log.md,registrado
 E-011,S-002,DAV-178,Ambiente com lock universal,requirements.txt,imports ok; pip dry-run ok
+E-012,S-003,DAV-181,Auditoria estrutural inicial (contagens; chaves; coerência temporal; viabilidade por corte),process-log/sessions/S-003-auditoria-e-limpeza.md,registrado
+E-013,S-003,DAV-201,Relatório de qualidade gerado (42 checagens),docs/data-quality-report.md,gerado e conferido
+E-014,S-003,DAV-201,Registro de tratamento TR-01 a TR-14,docs/data-treatment-log.md,escrito; revisão do candidato pendente
+E-015,S-003,DAV-201,Schema e SHA-256 da base limpa,solution/outputs/data_quality/derived_manifest.json,build determinístico (2 execuções)
+E-016,S-003,DAV-201,Testes da limpeza,solution/tests/test_clean_data.py,13 passed (suíte completa)
