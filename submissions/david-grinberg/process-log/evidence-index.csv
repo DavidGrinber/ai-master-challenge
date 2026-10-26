@@ -15,3 +15,9 @@ E-013,S-003,DAV-201,Relatório de qualidade gerado (42 checagens),docs/data-qual
 E-014,S-003,DAV-201,Registro de tratamento TR-01 a TR-14,docs/data-treatment-log.md,escrito; revisão do candidato pendente
 E-015,S-003,DAV-201,Schema e SHA-256 da base limpa,solution/outputs/data_quality/derived_manifest.json,build determinístico (2 execuções)
 E-016,S-003,DAV-201,Testes da limpeza,solution/tests/test_clean_data.py,13 passed (suíte completa)
+E-017,S-004,DAV-181,Avaliação do canal de dúvidas do repositório oficial (issues sem resposta),process-log/sessions/S-004-premissas-e-base-analitica.md,registrado; nada enviado
+E-018,S-004,DAV-181,Premissas P-01 a P-03 e contrato temporal,docs/data-contract.md,decidido (P) / revisão pendente (DEC-016)
+E-019,S-004,DAV-181,Reconciliação da base analítica,solution/outputs/analytic_base/reconciliation.csv,15/15 ok
+E-020,S-004,DAV-181,Rótulos e elegíveis por corte,solution/outputs/analytic_base/label_counts.csv,conferido com a S-003
+E-021,S-004,DAV-181,Dicionário gerado,docs/analytic-base-dictionary.md,gerado
+E-022,S-004,DAV-181,Testes da base analítica + mutação do teste de vazamento,solution/tests/test_analytic_base.py,20 passed; mutação detectada

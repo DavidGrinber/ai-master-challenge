@@ -246,7 +246,7 @@ def clean(raw: dict[str, pd.DataFrame]) -> tuple[dict[str, pd.DataFrame], list[d
             "support_tickets": tk, "churn_events": ce}, checks
 
 
-def _dtype_label(series: pd.Series) -> str:
+def dtype_label(series: pd.Series) -> str:
     if pd.api.types.is_datetime64_any_dtype(series):
         return "datetime"
     if isinstance(series.dtype, pd.BooleanDtype):
@@ -262,7 +262,7 @@ def _dtype_label(series: pd.Series) -> str:
     return "str"
 
 
-def _to_csv_text(df: pd.DataFrame) -> str:
+def to_csv_text(df: pd.DataFrame) -> str:
     out = df.copy()
     for col in out.columns:
         if pd.api.types.is_datetime64_any_dtype(out[col]):
@@ -278,12 +278,12 @@ def write(tables: dict[str, pd.DataFrame], checks: list[dict], raw: dict[str, pd
     manifest = {"generated_by": "solution/src/clean_data.py", "pandas": pd.__version__,
                 "data_end": str(data_end(raw).date()), "tables": {}}
     for name, df in tables.items():
-        data = _to_csv_text(df).encode("utf-8")
+        data = to_csv_text(df).encode("utf-8")
         (clean_dir / f"{name}.csv").write_bytes(data)
         manifest["tables"][name] = {
             "rows": len(df), "raw_rows": len(raw[name]),
             "sha256": hashlib.sha256(data).hexdigest(),
-            "columns": {c: _dtype_label(df[c]) for c in df.columns},
+            "columns": {c: dtype_label(df[c]) for c in df.columns},
         }
     (quality_dir / "derived_manifest.json").write_text(json.dumps(manifest, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     pd.DataFrame(checks).to_csv(quality_dir / "checks.csv", index=False, lineterminator="\n")
@@ -320,15 +320,20 @@ def build(raw_dir: Path = raw_data.RAW_DIR, clean_dir: Path = CLEAN_DIR,
     return write(tables, checks, raw, clean_dir, quality_dir, report)
 
 
-def load_clean(table: str, clean_dir: Path = CLEAN_DIR,
-               manifest_path: Path = QUALITY_DIR / "derived_manifest.json") -> pd.DataFrame:
-    columns = json.loads(manifest_path.read_text(encoding="utf-8"))["tables"][table]["columns"]
+def read_typed(path: Path, columns: dict[str, str]) -> pd.DataFrame:
+    """Lê um CSV gravado por to_csv_text com os tipos registrados no manifest."""
     dtypes = {c: t for c, t in columns.items() if t != "datetime"}
-    df = pd.read_csv(clean_dir / f"{table}.csv", dtype=dtypes, keep_default_na=False, na_values=[""])
+    df = pd.read_csv(path, dtype=dtypes, keep_default_na=False, na_values=[""])
     for col, kind in columns.items():
         if kind == "datetime":
             df[col] = pd.to_datetime(df[col], format="ISO8601")
     return df
+
+
+def load_clean(table: str, clean_dir: Path = CLEAN_DIR,
+               manifest_path: Path = QUALITY_DIR / "derived_manifest.json") -> pd.DataFrame:
+    columns = json.loads(manifest_path.read_text(encoding="utf-8"))["tables"][table]["columns"]
+    return read_typed(clean_dir / f"{table}.csv", columns)
 
 
 def main() -> int:

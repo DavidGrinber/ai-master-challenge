@@ -32,6 +32,14 @@ _Pendente (DAV-184 e DAV-189)._
 
 _Pendente (DAV-198)._
 
+### Premissas sobre os dados
+
+Os dados se contradizem em pontos que mudam o resultado. Sem orientação do responsável pelo case, estas premissas foram adotadas por decisão minha ([DEC-015](docs/decision-log.md); detalhes em [data-contract.md](docs/data-contract.md)):
+
+1. **Churn = evento registrado em `churn_events`, com data.** O `churn_flag` das contas contradiz os eventos em 312 de 500 contas e fica só como campo descritivo.
+2. **MRR da conta = soma das assinaturas ativas na data, sem as 4 duplicatas.** As assinaturas se sobrepõem (média de 9 ativas por conta), então o valor absoluto é um artefato do dataset simulado.
+3. **Uso e tickets entram pela data do próprio evento**, embora metade deles seja anterior ao cadastro da conta. Conclusões que dependem dessas datas carregam essa ressalva.
+
 ### Limitações
 
 - Os dados são simulados: a fonte declara que foram gerados com Python e ChatGPT ([manifest](solution/data/manifest.json)). Conclusões valem para este dataset, não para uma operação real.
@@ -57,12 +65,13 @@ python3.12 -m venv .venv
 .venv/bin/python solution/src/raw_data.py fetch      # baixa o pacote público do Kaggle (sem login) para solution/data/raw/
 .venv/bin/python solution/src/raw_data.py verify     # confere tamanho e SHA-256 dos 6 arquivos contra o manifest
 .venv/bin/python solution/src/clean_data.py          # base derivada limpa + relatório de qualidade
+.venv/bin/python solution/src/analytic_base.py       # perfil por conta + snapshots conta × data de corte, com reconciliação
 .venv/bin/python -m pytest                           # testes
 ```
 
 Se o download automático falhar, baixe o zip na [página do dataset](https://www.kaggle.com/datasets/rivalytics/saas-subscription-and-churn-analytics-dataset) e rode `.venv/bin/python solution/src/raw_data.py fetch --archive caminho/do/arquivo.zip`.
 
-_Base analítica, treino, geração de scores e painel: pendentes (DAV-181, DAV-189, DAV-194)._
+_Treino, geração de scores e painel: pendentes (DAV-189, DAV-194)._
 
 ---
 

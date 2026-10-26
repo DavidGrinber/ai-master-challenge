@@ -1,0 +1,16 @@
+check,expected,observed,ok
+perfil: contas,500,500,True
+perfil: account_id único,1,1,True
+perfil: eventos de churn,600,600,True
+perfil: assinaturas sem duplicatas,4996,4996,True
+perfil: MRR ativo no fim,10151064,10151064,True
+perfil: linhas de uso,25000,25000,True
+perfil: usage_count,250525,250525,True
+perfil: error_count,14107,14107,True
+perfil: tickets,2000,2000,True
+"snapshots: (account_id, cutoff_date) único",1,1,True
+snapshots em 2024-12-31: contas elegíveis,500,500,True
+snapshots em 2024-12-31: MRR ativo,10151064,10151064,True
+snapshots em 2024-12-31: linhas de uso até t,25000,25000,True
+snapshots em 2024-12-31: tickets até t,2000,2000,True
+snapshots em 2024-12-31: eventos de churn até t,600,600,True

@@ -29,9 +29,9 @@ Proposta e implementação: Claude Code (S-003), a pedido do candidato. Revisão
 
 ## Limitações para as próximas etapas
 
-1. **As datas de uso e de tickets não seguem o ciclo da conta** (TR-09). Features temporais como "queda de uso nos últimos 30 dias" ou "tickets recentes" podem não refletir a realidade da conta. A H01 (queda de uso antecede churn) segue testável, mas o resultado precisa citar esta limitação (DAV-184). Um modelo temporal pode não superar o baseline (DAV-189).
-2. **Não existe "churn" único** (TR-10). A DAV-181 precisa escolher a fonte e a unidade antes de qualquer taxa; `churn_flag` e `is_reactivation` são contraditórios e não servem como alvo.
-3. **O MRR da conta é ambíguo** com assinaturas sobrepostas (TR-07), então o valor exposto no painel depende da definição da DAV-181. Excluir sempre `q_is_duplicate` das somas.
+1. **As datas de uso e de tickets não seguem o ciclo da conta** (TR-09). Premissa P-03 (DEC-015): esses eventos entram pela própria data, com ressalva. Features temporais como "queda de uso nos últimos 30 dias" ou "tickets recentes" podem não refletir a realidade da conta. A H01 (queda de uso antecede churn) segue testável, mas o resultado precisa citar esta limitação (DAV-184). Um modelo temporal pode não superar o baseline (DAV-189).
+2. **Não existe "churn" único** (TR-10). A DAV-181 precisa escolher a fonte e a unidade antes de qualquer taxa; `churn_flag` e `is_reactivation` são contraditórios e não servem como alvo. → Encaminhado pela premissa P-01 (churn = evento em `churn_events`), decisão do candidato na DAV-181 (DEC-015).
+3. **O MRR da conta é ambíguo** com assinaturas sobrepostas (TR-07), então o valor exposto no painel depende da definição da DAV-181. Excluir sempre `q_is_duplicate` das somas. → Encaminhado pela premissa P-02 (soma das ativas sem duplicatas), DEC-015.
 4. **O motivo declarado não é confiável** como explicação (TR-12): `reason_code` e `feedback_text` concordam em só 101 de 379 casos.
 5. **A escala de satisfação vai de 3 a 5** (TR-14): o dado não mostra insatisfação abaixo de 3, o que importa para a frase "o CS diz que a satisfação está ok".
 6. **Dados simulados** (manifest): as inconsistências acima provavelmente vêm do gerador do dataset, não de falhas operacionais da RavenStack. O relatório final deve dizer isso.
