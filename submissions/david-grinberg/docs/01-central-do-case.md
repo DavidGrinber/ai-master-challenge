@@ -1,4 +1,7 @@
 # Central do case — RavenStack / G4
+
+> **Snapshot do kit S-001 (ChatGPT, 26/10/2026, roadmap de 24 issues).** Preservado como registro do planejamento. Versão vigente no Linear: roadmap consolidado em 8 issues ativas; a DAV-178 passou a incluir a revisão das hipóteses e a aquisição dos CSVs; as operações de Git/GitHub cabem ao Claude Code. Regras em vigor: `../CLAUDE.md`.
+
 Atualização: 26/10/2026. Fase: planejamento, sem dados analisados.
 Projeto: https://linear.app/david-grinberg/project/g4-ravenstack-diagnostico-de-churn-e-cs-1a6781700e39
 

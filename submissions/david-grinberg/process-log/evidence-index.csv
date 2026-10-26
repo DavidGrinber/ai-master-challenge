@@ -2,3 +2,11 @@ evidence_id,session_id,linear_issue,description,path,status
 E-001,S-001,DAV-177,Regras oficiais no commit fixado,docs/references/SOURCE.md,consultado
 E-002,S-001,DAV-177,Roadmap e links de tarefas criadas,docs/roadmap-linear.json,criado e conferido
 E-003,S-001,DAV-177,Registro de preparação e kit,process-log/sessions/S-001-planejamento-chatgpt.md,preparado
+E-004,S-002,DAV-178,Prompt literal da sessão,process-log/sessions/S-002-prompt-usuario.md,salvo
+E-005,S-002,DAV-178,Kit importado sem alteração (diff -r idêntico),commit 930e594,verificado
+E-006,S-002,DAV-178,"Fork, remotes e branch",process-log/sessions/S-002-claude-code-harness.md,verificado
+E-007,S-002,DAV-178,"Origem, versão, licença e SHA-256 dos originais",solution/data/manifest.json,verificado (2 downloads idênticos)
+E-008,S-002,DAV-178,Conferência dos originais (raw_data.py verify),process-log/sessions/S-002-claude-code-harness.md,ok 6/6
+E-009,S-002,DAV-178,Testes do harness,solution/tests/test_raw_data.py,7 passed
+E-010,S-002,DAV-178,Revisão das hipóteses e exploração anterior declarada,docs/02-hipoteses.md; docs/decision-log.md,registrado
+E-011,S-002,DAV-178,Ambiente com lock universal,requirements.txt,imports ok; pip dry-run ok

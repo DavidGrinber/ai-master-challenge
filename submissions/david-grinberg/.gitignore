@@ -1,12 +1,18 @@
-# Dados e ambiente locais — manifest e instruções são versionados
+# Ambiente local e segredos
 .venv/
 __pycache__/
+.pytest_cache/
 .ipynb_checkpoints/
+.DS_Store
 .env
 .env.*
 !.env.example
-solution/data/raw/*
-!solution/data/raw/.gitkeep
-solution/data/processed/*
-!solution/data/processed/.gitkeep
 *.log
+
+# Dados locais: os originais e as bases derivadas não são versionados.
+# Reprodução: solution/data/manifest.json + solution/src/raw_data.py fetch|verify.
+# Padrões com **/ valem tanto aqui quanto via `git ls-files --exclude-from` (scripts/stage.sh).
+**/solution/data/raw/*
+!**/solution/data/raw/.gitkeep
+**/solution/data/processed/*
+!**/solution/data/processed/.gitkeep

@@ -44,4 +44,10 @@ Predição indica risco, não efeito de uma intervenção. Uplift e retenção i
 Se datas, labels ou cobertura forem insuficientes, marcar limitação, rever alvo e decidir escopo. Não camuflar classificação retrospectiva como previsão operacional. Evidências de dados sintéticos, se confirmadas na fonte, limitam generalização para produção.
 
 
+## Revisão do candidato — 2026-10-26 (sessão S-002, DAV-178)
+Registrada antes de qualquer leitura do conteúdo dos CSVs neste fluxo. O texto das hipóteses acima é o do kit S-001, fixado sem alteração no commit 930e594.
+- Decisão do candidato: H01–H09 aprovadas como registro pré-análise. Todas permanecem NÃO TESTADAS. Origem mantida: H01–H04 = U (pedido original do candidato); H05–H09 = P (propostas do ChatGPT no planejamento, agora aceitas pelo candidato).
+- Exploração anterior declarada pelo candidato: antes deste fluxo, abriu/olhou os CSVs e usou IA sobre os dados. Quando, com qual ferramenta e o que foi observado não foram detalhados (pendente). Portanto, este não é um registro cego e as hipóteses podem ter sido influenciadas por essa exploração. Ver DEC-008.
+- Neste fluxo, até a revisão, os dados foram só baixados e conferidos por tamanho e SHA-256; nenhum valor foi lido.
+
 Documento no Linear: https://linear.app/david-grinberg/document/02-hipoteses-pre-analise-e-protocolo-de-validacao-7e2fa1da7520

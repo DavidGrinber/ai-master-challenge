@@ -1,0 +1,5 @@
+# Dependências diretas. Recompile requirements.txt com o comando em CLAUDE.md.
+pandas
+scikit-learn
+streamlit
+pytest

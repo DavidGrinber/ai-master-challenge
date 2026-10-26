@@ -1,0 +1,27 @@
+{
+  "dataset": {
+    "title": "SaaS Subscription & Churn Analytics Dataset",
+    "kaggle_ref": "rivalytics/saas-subscription-and-churn-analytics-dataset",
+    "page_url": "https://www.kaggle.com/datasets/rivalytics/saas-subscription-and-churn-analytics-dataset",
+    "download_url": "https://www.kaggle.com/api/v1/datasets/download/rivalytics/saas-subscription-and-churn-analytics-dataset",
+    "kaggle_dataset_id": 7915957,
+    "version_number": 1,
+    "version_created_utc": "2025-07-21T23:53:44.247Z",
+    "version_notes": "Initial release",
+    "license": "MIT",
+    "nature": "Simulado. Descrição da fonte: 'This simulated dataset was created using Python and ChatGPT'. RavenStack é uma empresa fictícia.",
+    "archive_bytes": 600149,
+    "archive_sha256": "ce6afd8d1fe1e129a40ec8efc1756ae8933ed9f05d62a7945c28873e5baa15c0",
+    "archive_note": "Hash do zip baixado em 2026-10-26; informativo, pois o pacote pode ser recompactado pela fonte. A integridade é garantida pelos hashes por arquivo.",
+    "retrieved_at": "2026-10-26T16:50:00-03:00",
+    "retrieved_by": "Claude Code, sessão S-002 (DAV-178), download público sem autenticação"
+  },
+  "files": [
+    {"name": "ravenstack_accounts.csv", "bytes": 36649, "sha256": "348d8ba906b7776894b5236b2e7aa91a503d41670dbc9aad30c37b503c9abef5"},
+    {"name": "ravenstack_subscriptions.csv", "bytes": 437566, "sha256": "dcf1d93ca9a35e0dcba0ab686d255f0e9ec26512970bbf0944cf19cbef2d751a"},
+    {"name": "ravenstack_feature_usage.csv", "bytes": 1400898, "sha256": "c081da2be8caf987d07f0f79ceb0619aba523d819529230ed6df77984fa21d4e"},
+    {"name": "ravenstack_support_tickets.csv", "bytes": 145598, "sha256": "ba0006951479771ee9f93c98789c96bc5fec892cf11f867afb28194f0b76d220"},
+    {"name": "ravenstack_churn_events.csv", "bytes": 44630, "sha256": "6391c41d8291b7b4845ec9a84d3837c2ed230a33a32a854ec33d4e66dc150940"},
+    {"name": "README.md", "bytes": 7809, "sha256": "ce1293cf6e484eda1c86b8f95bf9d3760ccb633f39327271a1925fe4eafbc0d0"}
+  ]
+}

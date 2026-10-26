@@ -1,5 +1,8 @@
 # Execução e evidências
 
+> **Snapshot do kit S-001 (ChatGPT, 26/10/2026, roadmap de 24 issues).** Preservado como registro do planejamento. Versão vigente no Linear: roadmap consolidado em 8 issues ativas; a DAV-178 passou a incluir a revisão das hipóteses e a aquisição dos CSVs; as operações de Git/GitHub cabem ao Claude Code. Regras em vigor: `../CLAUDE.md`.
+
+
 ## Fontes de verdade
 - Linear: ordem, escopo, dependências, status e resumo das decisões.
 - Fork Git: arquivos oficiais da entrega; código, documentos, logs, exports e artefatos pequenos.

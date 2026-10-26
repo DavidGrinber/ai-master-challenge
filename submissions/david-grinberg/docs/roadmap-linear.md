@@ -1,5 +1,8 @@
 # Roadmap exportado do Linear
 
+> **Snapshot do kit S-001 (ChatGPT, 26/10/2026, roadmap de 24 issues).** Preservado como registro do planejamento. Versão vigente no Linear: roadmap consolidado em 8 issues ativas; a DAV-178 passou a incluir a revisão das hipóteses e a aquisição dos CSVs; as operações de Git/GitHub cabem ao Claude Code. Regras em vigor: `../CLAUDE.md`.
+
+
 Projeto: https://linear.app/david-grinberg/project/g4-ravenstack-diagnostico-de-churn-e-cs-1a6781700e39
 Exportação: 2026-10-26T10:57:11-03:00. Snapshot para a banca; o Linear permanece o controle vivo.
 

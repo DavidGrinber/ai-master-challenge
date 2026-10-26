@@ -1,5 +1,8 @@
 # Primeiro prompt — apenas setup
 
+> **Prompt do kit, não usado.** A sessão S-002 usou o "Prompt inicial adaptado" do documento 03 no Linear, preservado literalmente em `../process-log/sessions/S-002-prompt-usuario.md`.
+
+
 Tarefa: https://linear.app/david-grinberg/issue/DAV-178/01-preparar-fork-branch-ambiente-e-estrutura-da-submissao
 
 “Vamos iniciar o Challenge 001 da G4. Ainda não faça análise exploratória, não baixe CSVs, não treine modelos e não construa o painel.
