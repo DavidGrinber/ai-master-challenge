@@ -29,3 +29,8 @@ E-027,S-006,DAV-184,Tabelas do diagnóstico,solution/outputs/diagnosis/,gerado (
 E-028,S-006,DAV-184,Interpretação e matriz de hipóteses,docs/diagnosis-findings.md,escrita; validação do candidato pendente
 E-029,S-006,DAV-184,Contas no segmento de risco maior por MRR,solution/outputs/diagnosis/accounts_attention.csv,gerado (não é score)
 E-030,S-006,DAV-184,Testes estatísticos e da partição,solution/tests/test_diagnose.py,33 passed (suíte completa)
+E-031,S-007,DAV-189,Pré-registro do modelo,process-log/experiments/EXP-002-modelo-pre-registro.md,escrito antes do treino (19:25)
+E-032,S-007,DAV-189,Avaliação gerada (seleção; validação; teste único; priorização; calibração),docs/model-evaluation.md,gerado
+E-033,S-007,DAV-189,Model card,docs/model-card.md,números conferidos contra as saídas
+E-034,S-007,DAV-189,Scores da carteira em 2024-12-31,solution/outputs/scores/scores_2024-12-31.csv,500 contas; reproduzidos pelo modelo salvo (teste)
+E-035,S-007,DAV-189,Metadados e linhagem do modelo,solution/models/model_meta.json,versionado

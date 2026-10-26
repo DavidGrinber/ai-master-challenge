@@ -1,0 +1,4 @@
+part,a,b,metric,diff,lo,hi
+validação,M1 regressão logística,B1 tempo de casa curto,ap,-0.0116734,-0.0280555,0.012054
+teste,M1 regressão logística,B1 tempo de casa curto,ap,-0.070399,-0.11489,-0.0292354
+teste,M1 regressão logística,B1 tempo de casa curto,auc,-0.0519757,-0.0767525,-0.0278317

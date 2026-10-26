@@ -51,6 +51,7 @@ Fluxo: `raw/` → `clean_data.py` → `processed/clean/` → `analytic_base.py` 
 - Ler sempre a base limpa (`clean_data.load_clean`), nunca reimplementar o parsing dos originais. Colunas `q_*` são flags de qualidade: não apagar as linhas marcadas sem decisão registrada. `q_is_duplicate` é só informativo: não exclui nada (DEC-018).
 - Limitações conhecidas (detalhe em `docs/data-treatment-log.md`): datas de uso e tickets fora do ciclo da conta; `churn_flag` e `is_reactivation` contraditórios; assinaturas sobrepostas (MRR da conta ambíguo); `reason_code` incoerente com `feedback_text`; satisfação só com notas 3–5. Citar essas limitações em qualquer conclusão que dependa delas.
 - **Teste final reservado (DEC-019):** cortes de 2024-09-30 a 2024-11-30 só podem ser usados na avaliação final da DAV-189. Nenhuma exploração, escolha de feature ou limiar olha esses cortes.
+- **O teste já foi consumido (DEC-022):** a avaliação final da DAV-189 usou os cortes reservados. Qualquer regra nova de priorização só pode ser comparada na validação, e isso deve ser declarado. O painel usa o ranking por tempo de casa (`recommended_ranking`) e nunca exibe probabilidade (`probability_reliable = False`).
 - **O "risco do gerador" (H10)** usa o fim dos dados e é proibido como feature. Achados em `docs/diagnosis-findings.md`.
 - pandas 3.x: `str` é o dtype padrão para texto e copy-on-write está sempre ativo. Parsear datas explicitamente.
 
@@ -69,6 +70,7 @@ Verificados na sessão S-002 (saídas em `process-log/sessions/S-002-claude-code
 | `.venv/bin/python solution/src/clean_data.py` | gera `processed/clean/`, `outputs/data_quality/` e `docs/data-quality-report.md`; recusa rodar se os originais divergirem (S-003) |
 | `.venv/bin/python solution/src/analytic_base.py` | gera snapshots, perfil retrospectivo, reconciliação (15 checagens), contagem de rótulos e `docs/analytic-base-dictionary.md`; exige a base limpa conferida por hash (S-004) |
 | `.venv/bin/python solution/src/diagnose.py` | testa H01–H10 conforme o EXP-001 (bootstrap agrupado por conta) e gera `outputs/diagnosis/` e `docs/hypotheses-results.md`; ~15 s (S-006) |
+| `.venv/bin/python solution/src/model.py` | seleciona C na validação, avalia o teste **uma vez**, ajusta o modelo final e gera `outputs/model/`, `outputs/scores/scores_2024-12-31.csv`, `models/model_meta.json` e `docs/model-evaluation.md`; ~10 s (S-007) |
 | `.venv/bin/python -m pytest` | testes de `solution/tests/` |
 | `sh scripts/stage.sh` | prepara o commit e falha se algo fora da pasta estiver preparado |
 | `uv pip compile requirements.in --universal --python-version 3.12 --exclude-newer <AAAA-MM-DD> -o requirements.txt` | recompila o lock, apenas com versões publicadas até a data |
@@ -77,7 +79,6 @@ Planejados (ainda não existem; cada issue define nome e interface e move a linh
 
 | Issue | Comando previsto |
 |---|---|
-| DAV-189 | scripts de treino/avaliação e de geração de scores em `outputs/` |
 | DAV-194 | `.venv/bin/streamlit run solution/app/<arquivo>.py` |
 
 Não documentar como verificado um comando que não foi executado com saída observada.

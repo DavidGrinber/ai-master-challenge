@@ -16,3 +16,6 @@ __pycache__/
 !**/solution/data/raw/.gitkeep
 **/solution/data/processed/*
 !**/solution/data/processed/.gitkeep
+
+# Modelos serializados: regenerados por solution/src/model.py (pickle não vai para o PR)
+**/solution/models/*.joblib

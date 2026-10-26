@@ -21,5 +21,6 @@ Evidência de como a IA foi usada, uma sessão ou etapa por arquivo. Só registr
 | [S-004](sessions/S-004-premissas-e-base-analitica.md) | Claude Code | DAV-181 | premissas P-01 a P-03; snapshots conta × corte e perfil retrospectivo, reconciliados e sem vazamento |
 | [S-005](sessions/S-005-revisao-do-tratamento.md) | Claude Code | DAV-181, DAV-201 | revisão do candidato: elegibilidade e tratamentos aprovados; cópias exatas de assinatura passam a contar como legítimas |
 | [S-006](sessions/S-006-diagnostico-hipoteses.md) | Claude Code | DAV-184 | pré-registro; H01–H09 testadas; H10 (mecanismo do gerador) explica a subida do churn |
+| [S-007](sessions/S-007-modelo.md) | Claude Code | DAV-189 | modelo não supera o ranking por tempo de casa; sem probabilidade; scores da carteira |
 
 Decisões: [`../docs/decision-log.md`](../docs/decision-log.md). Hipóteses: [`../docs/02-hipoteses.md`](../docs/02-hipoteses.md).

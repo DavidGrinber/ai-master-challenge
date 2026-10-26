@@ -52,6 +52,7 @@ Os dados se contradizem em pontos que mudam o resultado. Sem orientação do res
   - A satisfação só tem notas de 3 a 5.
   - Nada foi apagado: cada problema está marcado por linha.
 - O churn dos dados segue um padrão compatível com o gerador do dataset: cerca de 1,2 evento por conta, em datas uniformes entre o cadastro e o fim dos dados. Nenhum comportamento (uso, suporte, satisfação, erros) antecipa o churn ([achados](docs/diagnosis-findings.md)).
+- O modelo preditivo (regressão logística, avaliado uma vez num período reservado) não supera um ranking simples por tempo de casa e não tem probabilidade confiável ([model card](docs/model-card.md)).
 - _Demais limitações: pendentes._
 
 ### Como reproduzir
@@ -67,12 +68,14 @@ python3.12 -m venv .venv
 .venv/bin/python solution/src/raw_data.py verify     # confere tamanho e SHA-256 dos 6 arquivos contra o manifest
 .venv/bin/python solution/src/clean_data.py          # base derivada limpa + relatório de qualidade
 .venv/bin/python solution/src/analytic_base.py       # perfil por conta + snapshots conta × data de corte, com reconciliação
+.venv/bin/python solution/src/diagnose.py          # testes das hipóteses (EXP-001)
+.venv/bin/python solution/src/model.py             # modelo, avaliação e scores da carteira (EXP-002)
 .venv/bin/python -m pytest                           # testes
 ```
 
 Se o download automático falhar, baixe o zip na [página do dataset](https://www.kaggle.com/datasets/rivalytics/saas-subscription-and-churn-analytics-dataset) e rode `.venv/bin/python solution/src/raw_data.py fetch --archive caminho/do/arquivo.zip`.
 
-_Treino, geração de scores e painel: pendentes (DAV-189, DAV-194)._
+_Painel: pendente (DAV-194)._
 
 ---
 
