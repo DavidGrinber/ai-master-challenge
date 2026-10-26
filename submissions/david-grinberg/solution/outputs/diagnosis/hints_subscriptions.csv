@@ -1,0 +1,9 @@
+variable,p,ended_rate_by_level,bonferroni_threshold
+plan_tier,0.887811,"{""Basic"": 0.095, ""Enterprise"": 0.1, ""Pro"": 0.097}",0.00625
+billing_frequency,0.486293,"{""annual"": 0.1, ""monthly"": 0.094}",0.00625
+auto_renew_flag,0.979585,"{""False"": 0.096, ""True"": 0.097}",0.00625
+upgrade_flag,0.44519,"{""False"": 0.098, ""True"": 0.087}",0.00625
+downgrade_flag,0.43897,"{""False"": 0.096, ""True"": 0.115}",0.00625
+is_trial,0.804601,"{""False"": 0.097, ""True"": 0.1}",0.00625
+seats,0.556929,AUC 0.492,0.00625
+mrr_amount,0.897768,AUC 0.498,0.00625

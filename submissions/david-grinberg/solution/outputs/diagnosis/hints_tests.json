@@ -1,0 +1,8 @@
+{
+  "p_refund_by_reason": 0.78604805701336,
+  "p_mrr_by_reason": 0.3177521039305704,
+  "p_preceding_upgrade_by_reason": 0.35633903076653906,
+  "p_preceding_downgrade_by_reason": 0.19439853654829622,
+  "preceding_upgrade_events_with_upgraded_sub": 0.6422764227642277,
+  "all_accounts_with_upgraded_sub": 0.614
+}

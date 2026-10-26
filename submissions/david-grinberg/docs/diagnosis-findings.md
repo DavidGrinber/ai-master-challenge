@@ -32,6 +32,22 @@ Premissas P-01 a P-03 em [data-contract.md](data-contract.md). Os dados são sim
 
 "Inconclusiva" segue a regra pré-registrada: o IC não era estreito o bastante (±0,03 de AUC) para declarar efeito nulo. Na prática, as estimativas ficam entre 0,47 e 0,51, e os dados descartam efeitos maiores que modestos.
 
+## As dicas do challenge, uma a uma (checagem complementar, exploratória)
+
+O candidato perguntou se todas as dicas do repositório tinham sido analisadas. A análise principal era temporal, então cinco comparações sugeridas pelas dicas foram feitas depois, como exploração pós-hoc com correção de Bonferroni. Números em [hints-checklist.md](hints-checklist.md), gerado por `solution/src/explore_hints.py`.
+
+| Dica do challenge | O que foi feito | Resultado |
+|---|---|---|
+| "Comece entendendo a estrutura dos dados" | auditoria e limpeza (DAV-201) | 42 checagens; inconsistências marcadas por linha |
+| "Cruze feature usage com churn events — há padrões?" | volume, queda (7/14/30 dias), erros e beta (EXP-001) **e** participação e adoção de cada uma das 40 features | nenhuma feature difere: no máximo 2 de 40 com p < 0,05 em cada teste (o esperado pelo acaso) e nenhuma após a correção |
+| "Olhe os tickets de quem churnou vs. quem ficou" | janelas temporais (EXP-001) **e** comparação direta no nível da conta, com as duas definições de churn (`churn_flag` e eventos), em 27 variáveis de perfil, assinatura, uso e suporte | 0 de 27 significativas em cada definição; menor p = 0,059 |
+| "O uso cresceu — vale pra todos os segmentos?" | uso por conta elegível por semestre, por plano, indústria e canal | não: sobe em EdTech (+19%) e orgânico (+11%), cai em DevTools (−14%) e evento (−13%), mas essas oscilações não acompanham diferenças de churn (H04 inconclusiva para esses segmentos) |
+| "Nem todo churn tem o mesmo peso" | taxa pesada por MRR (H08), MRR perdido por motivo, refund, ranking por MRR (DAV-189) | o MRR perdido se distribui entre os motivos sem diferença (p = 0,32); refund igual entre motivos (p = 0,79); MRR alto churna menos (AUC 0,41, coerente com a H10) |
+| "Cuidado com conclusões apressadas" | pré-registro, partição temporal, bootstrap por conta, Bonferroni, H10 | o único "sinal" (tempo de casa) é explicado pelo mecanismo do gerador |
+
+Também no nível de assinatura, o encerramento não depende de plano, cobrança, auto-renew, upgrade, downgrade, trial, seats nem MRR. A flag `preceding_upgrade_flag` dos eventos aparece em contas com upgrade quase na mesma proporção da base (64% contra 61%).
+**Conclusão mantida e reforçada:** com as duas definições de churn e com comparações temporais e retrospectivas, nenhuma variável dos dados explica o churn além do mecanismo do gerador (H10).
+
 ## Correlação × causa
 
 - Nada aqui demonstra causa. A associação entre tempo de casa e churn é explicada por um mecanismo de geração dos dados, então não indica que onboarding reduziria churn.

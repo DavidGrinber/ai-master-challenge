@@ -69,6 +69,7 @@ python3.12 -m venv .venv
 .venv/bin/python solution/src/clean_data.py          # base derivada limpa + relatório de qualidade
 .venv/bin/python solution/src/analytic_base.py       # perfil por conta + snapshots conta × data de corte, com reconciliação
 .venv/bin/python solution/src/diagnose.py          # testes das hipóteses (EXP-001)
+.venv/bin/python solution/src/explore_hints.py     # checagem das dicas do challenge (exploratória)
 .venv/bin/python solution/src/model.py             # modelo, avaliação e scores da carteira (EXP-002)
 .venv/bin/python -m pytest                           # testes
 ```

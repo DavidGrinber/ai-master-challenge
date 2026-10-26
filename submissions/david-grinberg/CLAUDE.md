@@ -70,6 +70,7 @@ Verificados na sessão S-002 (saídas em `process-log/sessions/S-002-claude-code
 | `.venv/bin/python solution/src/clean_data.py` | gera `processed/clean/`, `outputs/data_quality/` e `docs/data-quality-report.md`; recusa rodar se os originais divergirem (S-003) |
 | `.venv/bin/python solution/src/analytic_base.py` | gera snapshots, perfil retrospectivo, reconciliação (15 checagens), contagem de rótulos e `docs/analytic-base-dictionary.md`; exige a base limpa conferida por hash (S-004) |
 | `.venv/bin/python solution/src/diagnose.py` | testa H01–H10 conforme o EXP-001 (bootstrap agrupado por conta) e gera `outputs/diagnosis/` e `docs/hypotheses-results.md`; ~15 s (S-006) |
+| `.venv/bin/python solution/src/explore_hints.py` | checagem exploratória das dicas do challenge (churners × retidos, features, assinaturas, motivos, uso por segmento) e `docs/hints-checklist.md`; ~2 s (S-008) |
 | `.venv/bin/python solution/src/model.py` | seleciona C na validação, avalia o teste **uma vez**, ajusta o modelo final e gera `outputs/model/`, `outputs/scores/scores_2024-12-31.csv`, `models/model_meta.json` e `docs/model-evaluation.md`; ~10 s (S-007) |
 | `.venv/bin/python -m pytest` | testes de `solution/tests/` |
 | `sh scripts/stage.sh` | prepara o commit e falha se algo fora da pasta estiver preparado |

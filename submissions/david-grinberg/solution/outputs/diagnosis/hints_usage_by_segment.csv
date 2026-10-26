@@ -1,0 +1,14 @@
+level,2023S2,2024S1,2024S2,change,segment
+Basic,21.2879,21.4263,22.4299,0.0536484,plan_tier_initial
+Enterprise,22.7452,20.028,20.8602,-0.0828776,plan_tier_initial
+Pro,21.0314,21.4471,20.1686,-0.041026,plan_tier_initial
+Cybersecurity,22.4458,19.9798,22.0566,-0.017337,industry
+DevTools,23.922,22.5,20.4956,-0.143231,industry
+EdTech,17.4421,21.0455,20.7947,0.192212,industry
+FinTech,20.4115,20.6542,21.1969,0.0384813,industry
+HealthTech,21.6839,20.4147,21.0323,-0.0300522,industry
+ads,20.2113,20.5653,20.4944,0.0140062,referral_source
+event,24.0859,21.875,20.8816,-0.133035,referral_source
+organic,20.5036,20.6383,22.6714,0.105728,referral_source
+other,21.2712,20.5058,20.0642,-0.0567451,referral_source
+partner,22.2558,21.4377,21.3996,-0.0384731,referral_source

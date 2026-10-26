@@ -34,3 +34,4 @@ E-032,S-007,DAV-189,Avaliação gerada (seleção; validação; teste único; pr
 E-033,S-007,DAV-189,Model card,docs/model-card.md,números conferidos contra as saídas
 E-034,S-007,DAV-189,Scores da carteira em 2024-12-31,solution/outputs/scores/scores_2024-12-31.csv,500 contas; reproduzidos pelo modelo salvo (teste)
 E-035,S-007,DAV-189,Metadados e linhagem do modelo,solution/models/model_meta.json,versionado
+E-036,S-008,DAV-184,Checagem das dicas do challenge (exploratória; Bonferroni),docs/hints-checklist.md,gerado; 0 variáveis significativas nas duas definições
